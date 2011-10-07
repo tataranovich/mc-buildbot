@@ -1,0 +1,3 @@
+version=3
+opts="uversionmangle=s/.+-pre\d+//" \
+http://www.midnight-commander.org/downloads/mc-(.+)\.tar\.bz2
