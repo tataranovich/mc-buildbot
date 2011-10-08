@@ -1,0 +1,68 @@
+#!/bin/sh
+#
+# This script updates my local debian repository
+#
+
+set -e
+
+# Variables definition
+export LC_ALL=C
+export LANG=C
+
+APT_COMMON_CONF="$HOME/.apt-ftparchive-common.conf"
+APT_LENNY_CONF="$HOME/.apt-ftparchive-lenny.conf"
+APT_SQUEEZE_CONF="$HOME/.apt-ftparchive-squeeze.conf"
+APT_MAVERICK_CONF="$HOME/.apt-ftparchive-maverick.conf"
+APT_NATTY_CONF="$HOME/.apt-ftparchive-natty.conf"
+APT_REPO_PREFIX="$HOME/my-local-repo"
+
+# Currently I didn't know how to use them properly, so I simply
+# delete all of them before repo rescan.
+rm -f ${APT_REPO_PREFIX}/*.db
+
+# Check if apt-ftparchive available
+if [ ! -x `which apt-ftparchive` ]; then
+	echo "Seems that apt-ftparchive binary not installed"
+	exit 1
+fi
+
+apt-ftparchive generate ${APT_COMMON_CONF} 2>&1 | egrep -v 'has no (binary|source) override entry'
+
+if [ -d ${APT_REPO_PREFIX}/dists/lenny ]; then
+	echo "Processing Lenny release"
+	cd ${APT_REPO_PREFIX}/dists/lenny
+	apt-ftparchive -c ${APT_LENNY_CONF} release . > Release
+	rm -f Release.gpg
+	gpg --batch --output Release.gpg -ba Release
+fi
+
+if [ -d ${APT_REPO_PREFIX}/dists/squeeze ]; then
+	echo "Processing Squeeze release"
+	cd ${APT_REPO_PREFIX}/dists/squeeze
+	apt-ftparchive -c ${APT_SQUEEZE_CONF} release . > Release
+	rm -f Release.gpg
+	gpg --batch --output Release.gpg -ba Release
+fi
+
+if [ -d ${APT_REPO_PREFIX}/dists/maverick ]; then
+    echo "Processing Maverick release"
+    cd ${APT_REPO_PREFIX}/dists/maverick
+    apt-ftparchive -c ${APT_MAVERICK_CONF} release . > Release
+    rm -f Release.gpg
+    gpg --batch --output Release.gpg -ba Release
+fi
+
+if [ -d ${APT_REPO_PREFIX}/dists/natty ]; then
+    echo "Processing Natty release"
+    cd ${APT_REPO_PREFIX}/dists/natty
+    apt-ftparchive -c ${APT_NATTY_CONF} release . > Release
+    rm -f Release.gpg
+    gpg --batch --output Release.gpg -ba Release
+fi
+
+# Fix permissions
+find ${APT_REPO_PREFIX} -type f -print0 | xargs -r0 chmod 644
+find ${APT_REPO_PREFIX} -type d -print0 | xargs -r0 chmod 755
+
+rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/pool repository:debian/ && \
+rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/dists repository:debian/
