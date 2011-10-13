@@ -8,7 +8,7 @@ echo "Started at `date -R`"
 if [ "$1" != "--force" ]; then
 	uscan --destdir /home/buildbot/tmp/uscan --download --repack --rename $HOME/debian-packages/mc || {
 		echo
-		echo "Now new release found"
+		echo "No new release found"
 		echo
 		echo "Successfully ended at `date -R`"
 		exit 0
