@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -e
 echo "Started at `date -R`"
 
 [ -x ~/bin/prepare-environment.sh ] && ~/bin/prepare-environment.sh
