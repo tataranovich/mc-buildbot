@@ -5,6 +5,9 @@ echo "Started at `date -R`"
 
 [ -x ~/bin/prepare-environment.sh ] && ~/bin/prepare-environment.sh
 
+# Cleanup
+rm -f /home/buildbot/tmp/uscan/mc*tar.*
+
 if [ "$1" != "--force" ]; then
 	uscan --destdir /home/buildbot/tmp/uscan --download --repack --rename $HOME/debian-packages/mc || {
 		echo
