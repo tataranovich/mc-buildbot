@@ -40,16 +40,6 @@ fi
 
 # Check if build type is release and source distribution exists
 if [ "${MC_BUILD_TYPE}" == "--release" -a -f "$2" ]; then
-	# Build from release from source distribution
-	#[ -d ${MC_TMP}/repack ] && rm -fr ${MC_TMP}/repack
-	#mkdir -p ${MC_TMP}/repack
-	#cd ${MC_TMP}/repack
-	#MC_VERSION=`ls -1 "$2" | sed -e 's#^.*mc[-_]##' -e 's#\.tar\..*$##'`
-	#tar xf "$2"
-	#tar czf mc_${MC_VERSION}.orig.tar.gz mc-${MC_VERSION}
-	#mv mc_${MC_VERSION}.orig.tar.gz ${MC_BINARY}
-	#cd ${MC_BUILD_PREFIX}
-	#rm -fr ${MC_TMP}/repack
 	MC_VERSION=`ls -1 "$2" | sed -e 's#^.*mc[-_]##' -e 's#\.orig\.tar\..*$##'`
 	mv "$2" ${MC_BINARY}
 fi
@@ -83,6 +73,7 @@ fi
 if [ "${MC_BUILD_TYPE}" == "--nightly" ]; then
 	make dist
 	MC_VERSION=`ls -1 mc-*.tar.gz | sed -e 's#^mc-##' -e 's#\.tar\.gz$##'`
+	PKG_VERSION=`echo $MC_VERSION | perl -pi -e 's/^([\d\.]+).*$/\1/'`
 	mv mc-*.tar.gz ${MC_BINARY}/mc_${MC_VERSION}.orig.tar.gz
 fi
 
@@ -112,11 +103,17 @@ elif [ "${MC_BUILD_TYPE}" == "--nightly" ]; then
 	cd ${MC_BINARY}
 	rm -fr mc-${MC_VERSION}
 	tar xf ${MC_BINARY}/mc_${MC_VERSION}.orig.tar.gz
-	mv mc-${MC_VERSION} mc-${MC_VERSION}~git`date +'%Y%m%d'`
-	tar czf mc_${MC_VERSION}~git`date +'%Y%m%d'`.orig.tar.gz mc-${MC_VERSION}~git`date +'%Y%m%d'`
-	cd mc-${MC_VERSION}~git`date +'%Y%m%d'`
+	mv mc-${MC_VERSION} mc-${PKG_VERSION}~git`date +'%Y%m%d'`
+	tar czf mc_${PKG_VERSION}~git`date +'%Y%m%d'`.orig.tar.gz mc-${PKG_VERSION}~git`date +'%Y%m%d'`
+	cd mc-${PKG_VERSION}~git`date +'%Y%m%d'`
 	cp -a ${MC_CONTRIB}/contrib/debian .
-	dch -b -v 3:${MC_VERSION}~git`date +'%Y%m%d'`-1 'Nightly build.'
+	if [ -r ${MC_BUILD_PREFIX}/.series/git`date +'%Y%m%d'` ]; then
+		REL=`cat ${MC_BUILD_PREFIX}/.series/git`date +'%Y%m%d'``
+		let REL=$REL+1
+	else
+		REL=1
+	fi
+	dch -v 3:${PKG_VERSION}~git`date +'%Y%m%d'`-${REL} 'GIT build.'
 fi
 
 dpkg-buildpackage -rfakeroot -us -uc
