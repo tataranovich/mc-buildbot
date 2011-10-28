@@ -101,19 +101,20 @@ if [ "${MC_BUILD_TYPE}" == "--release" ]; then
 	dch -v 3:${MC_VERSION}-${REL} 'New upstream release.'
 elif [ "${MC_BUILD_TYPE}" == "--nightly" ]; then
 	cd ${MC_BINARY}
+	GIT_SUFFIX=git`date +'%Y%m%d'`
 	rm -fr mc-${MC_VERSION}
 	tar xf ${MC_BINARY}/mc_${MC_VERSION}.orig.tar.gz
-	mv mc-${MC_VERSION} mc-${PKG_VERSION}~git`date +'%Y%m%d'`
-	tar czf mc_${PKG_VERSION}~git`date +'%Y%m%d'`.orig.tar.gz mc-${PKG_VERSION}~git`date +'%Y%m%d'`
-	cd mc-${PKG_VERSION}~git`date +'%Y%m%d'`
+	mv mc-${MC_VERSION} mc-${PKG_VERSION}~${GIT_SUFFIX}
+	tar czf mc_${PKG_VERSION}~${GIT_SUFFIX}.orig.tar.gz mc-${PKG_VERSION}~${GIT_SUFFIX}
+	cd mc-${PKG_VERSION}~${GIT_SUFFIX}
 	cp -a ${MC_CONTRIB}/contrib/debian .
-	if [ -r ${MC_BUILD_PREFIX}/.series/git`date +'%Y%m%d'` ]; then
-		REL=`cat ${MC_BUILD_PREFIX}/.series/git`date +'%Y%m%d'``
+	if [ -r ${MC_BUILD_PREFIX}/.series/${GIT_SUFFIX} ]; then
+		REL=`cat ${MC_BUILD_PREFIX}/.series/${GIT_SUFFIX}`
 		let REL=$REL+1
 	else
 		REL=1
 	fi
-	dch -v 4:${PKG_VERSION}~git`date +'%Y%m%d'`-${REL} 'GIT build.'
+	dch -v 4:${PKG_VERSION}~${GIT_SUFFIX}-${REL} 'GIT build.'
 fi
 
 dpkg-buildpackage -rfakeroot -us -uc
@@ -128,8 +129,8 @@ if [ "${MC_BUILD_TYPE}" == "--release" ]; then
 fi
 
 if [ "${MC_BUILD_TYPE}" == "--nightly" ]; then
+	[ -n ${GIT_SUFFIX} ] && echo $REL > ${MC_BUILD_PREFIX}/.series/${GIT_SUFFIX}
 	cd ${MC_GIT_LOCAL}
-	echo $REL > ${MC_BUILD_PREFIX}/.series/git`date +'%Y%m%d'`
 	git log -n 1 | grep ^commit | head -n 1 | awk '{print $2}' > ${MC_BUILD_PREFIX}/.series/nightly
 fi
 
