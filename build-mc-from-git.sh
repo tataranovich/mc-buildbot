@@ -25,7 +25,7 @@ if [ ! -d ${MC_CONTRIB} ]; then
 else
 	cd ${MC_CONTRIB}
 	hg pull
-	hg up -C
+	hg up -C default
 fi
 
 # Update local GIT repo if build type is nightly
@@ -113,7 +113,7 @@ elif [ "${MC_BUILD_TYPE}" == "--nightly" ]; then
 	else
 		REL=1
 	fi
-	dch -v 3:${PKG_VERSION}~git`date +'%Y%m%d'`-${REL} 'GIT build.'
+	dch -v 4:${PKG_VERSION}~git`date +'%Y%m%d'`-${REL} 'GIT build.'
 fi
 
 dpkg-buildpackage -rfakeroot -us -uc
@@ -129,6 +129,7 @@ fi
 
 if [ "${MC_BUILD_TYPE}" == "--nightly" ]; then
 	cd ${MC_GIT_LOCAL}
+	echo $REL > ${MC_BUILD_PREFIX}/.series/git`date +'%Y%m%d'`
 	git log -n 1 | grep ^commit | head -n 1 | awk '{print $2}' > ${MC_BUILD_PREFIX}/.series/nightly
 fi
 
