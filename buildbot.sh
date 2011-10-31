@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TARGETS="lenny-i386 lenny-amd64 squeeze-i386 squeeze-amd64 maverick-i386 maverick-amd64 natty-i386 natty-amd64"
+TARGETS="lenny-i386 lenny-amd64 squeeze-i386 squeeze-amd64 wheezy-i386 wheezy-amd64 sid-i386 sid-amd64 hardy-i386 hardy-amd64 lucid-i386 lucid-amd64 maverick-i386 maverick-amd64 natty-i386 natty-amd64 oneiric-i386 oneiric-amd64"
 
 if [ -z "$1" ]; then
 	echo "Usage: $0 <--release|--nightly> [release_distribution]"

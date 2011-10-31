@@ -12,8 +12,12 @@ export LANG=C
 APT_COMMON_CONF="$HOME/.apt-ftparchive-common.conf"
 APT_LENNY_CONF="$HOME/.apt-ftparchive-lenny.conf"
 APT_SQUEEZE_CONF="$HOME/.apt-ftparchive-squeeze.conf"
+APT_WHEEZY_CONF="$HOME/.apt-ftparchive-wheezy.conf"
+APT_SID_CONF="$HOME/.apt-ftparchive-sid.conf"
+APT_LUCID_CONF="$HOME/.apt-ftparchive-lucid.conf"
 APT_MAVERICK_CONF="$HOME/.apt-ftparchive-maverick.conf"
 APT_NATTY_CONF="$HOME/.apt-ftparchive-natty.conf"
+APT_ONEIRIC_CONF="$HOME/.apt-ftparchive-oneiric.conf"
 APT_REPO_PREFIX="$HOME/my-local-repo"
 
 # Currently I didn't know how to use them properly, so I simply
@@ -44,6 +48,30 @@ if [ -d ${APT_REPO_PREFIX}/dists/squeeze ]; then
 	gpg --batch --output Release.gpg -ba Release
 fi
 
+if [ -d ${APT_REPO_PREFIX}/dists/wheezy ]; then
+	echo "Processing Wheezy release"
+	cd ${APT_REPO_PREFIX}/dists/wheezy
+	apt-ftparchive -c ${APT_WHEEZY_CONF} release . > Release
+	rm -f Release.gpg
+	gpg --batch --output Release.gpg -ba Release
+fi
+
+if [ -d ${APT_REPO_PREFIX}/dists/sid ]; then
+	echo "Processing Sid release"
+	cd ${APT_REPO_PREFIX}/dists/sid
+	apt-ftparchive -c ${APT_SID_CONF} release . > Release
+	rm -f Release.gpg
+	gpg --batch --output Release.gpg -ba Release
+fi
+
+if [ -d ${APT_REPO_PREFIX}/dists/lucid ]; then
+    echo "Processing Lucid release"
+    cd ${APT_REPO_PREFIX}/dists/lucid
+    apt-ftparchive -c ${APT_LUCID_CONF} release . > Release
+    rm -f Release.gpg
+    gpg --batch --output Release.gpg -ba Release
+fi
+
 if [ -d ${APT_REPO_PREFIX}/dists/maverick ]; then
     echo "Processing Maverick release"
     cd ${APT_REPO_PREFIX}/dists/maverick
@@ -56,6 +84,14 @@ if [ -d ${APT_REPO_PREFIX}/dists/natty ]; then
     echo "Processing Natty release"
     cd ${APT_REPO_PREFIX}/dists/natty
     apt-ftparchive -c ${APT_NATTY_CONF} release . > Release
+    rm -f Release.gpg
+    gpg --batch --output Release.gpg -ba Release
+fi
+
+if [ -d ${APT_REPO_PREFIX}/dists/oneiric ]; then
+    echo "Processing Oneiric release"
+    cd ${APT_REPO_PREFIX}/dists/oneiric
+    apt-ftparchive -c ${APT_ONEIRIC_CONF} release . > Release
     rm -f Release.gpg
     gpg --batch --output Release.gpg -ba Release
 fi
