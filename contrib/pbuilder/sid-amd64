@@ -1,0 +1,5 @@
+ARCHITECTURE=amd64
+MIRRORSITE=http://ftp.mgts.by/debian
+BASETGZ=/var/cache/pbuilder/base-sid-amd64.tgz
+BUILDRESULT=/var/cache/pbuilder/result-sid-amd64/
+DISTRIBUTION=sid

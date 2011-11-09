@@ -1,0 +1,5 @@
+ARCHITECTURE=i386
+MIRRORSITE=http://ftp.mgts.by/debian
+BASETGZ=/var/cache/pbuilder/base-sid-i386.tgz
+BUILDRESULT=/var/cache/pbuilder/result-sid-i386/
+DISTRIBUTION=sid
