@@ -1,3 +1,2 @@
 upstream/mc_4.8.0~git_disable_x11_flag.patch
-#upstream/mc_4.8.0~git_vfs_refresh_fix.patch
 #upstream/mc_4.8.0~git_sftp.patch
