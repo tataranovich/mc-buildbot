@@ -1,9 +1,9 @@
 #!/bin/bash
 #
-# Example: buildbot-build-target.sh --build stable --target lenny-amd64 --src ~/tmp/test.dsc --move-results /tmp/pbuilder
+# Example: buildbot-build-target.sh --build release --target lenny-amd64 --src ~/tmp/test.dsc
 #
 
-TARGETS="lenny-i386 lenny-amd64 squeeze-i386 squeeze-amd64 wheezy-i386 wheezy-amd64 sid-i386 sid-amd64 hardy-i386 hardy-amd64 lucid-i386 lucid-amd64 maverick-i386 maverick-amd64 natty-i386 natty-amd64 oneiric-i386 oneiric-amd64"
+TARGETS="lenny-i386 lenny-amd64 squeeze-i386 squeeze-amd64 wheezy-i386 wheezy-amd64 sid-i386 sid-amd64 lucid-i386 lucid-amd64 maverick-i386 maverick-amd64 natty-i386 natty-amd64 oneiric-i386 oneiric-amd64"
 
 die() {
 	if [ ! -z "$1" ]; then
