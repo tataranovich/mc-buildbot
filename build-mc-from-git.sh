@@ -5,7 +5,7 @@ export DEBCHANGE_TZ="Europe/Minsk"
 export DEBEMAIL="tataranovich@gmail.com"
 export DEBFULLNAME="Andrey Tataranovich"
 
-MC_GIT_REMOTE="git://midnight-commander.org/git/mc.git"
+MC_GIT_REMOTE="git://github.com/MidnightCommander/mc.git"
 MC_DEBIAN_VCS="http://mc-buildbot.googlecode.com/hg"
 MC_BUILD_PREFIX="/home/buildbot"
 MC_GIT_LOCAL=${MC_BUILD_PREFIX}/mc-git
