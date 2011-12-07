@@ -1,7 +1,5 @@
 #!/bin/bash
 
-TARGETS="lenny-i386 lenny-amd64 squeeze-i386 squeeze-amd64 wheezy-i386 wheezy-amd64 sid-i386 sid-amd64 hardy-i386 hardy-amd64 lucid-i386 lucid-amd64 maverick-i386 maverick-amd64 natty-i386 natty-amd64 oneiric-i386 oneiric-amd64"
-
 if [ -z "$1" ]; then
 	echo "Usage: $0 <--release|--nightly> [release_distribution]"
 	exit 1
@@ -20,7 +18,6 @@ rm -fr /home/buildbot/mc-build
 case "$1" in
 	--nightly) sudo pbuilder --execute --configfile /etc/pbuilder/buildbot -- /home/buildbot/initial-build.sh --nightly;;
 	--release) sudo pbuilder --execute --configfile /etc/pbuilder/buildbot -- /home/buildbot/initial-build.sh --release "$2";;
-#	--check) sudo pbuilder --execute --configfile /etc/pbuilder/buildbot -- /home/buildbot/initial-build.sh --check;;
 	*) exit 1;;
 esac || {
 	echo "BUILDBOT: Initial build failed!"
@@ -28,38 +25,18 @@ esac || {
 	exit 1
 }
 
-# Check build without targets
-#rm -fr /home/buildbot/mc-build
-#exit 0
-
 echo "BUILDBOT: Start checking with piuparts"
 sudo piuparts --basetgz /var/cache/pbuilder/base-squeeze-i386.tgz -d squeeze /home/buildbot/mc-build/mc_*.changes && {
 	echo "BUILDBOT: piuparts check sucessfull, starting target builds"
-	for i in $TARGETS
-	do
-		echo "BUILDBOT: -> build target $i"
-		sudo pbuilder --build --configfile /etc/pbuilder/$i /home/buildbot/mc-build/mc_*.dsc && {
-			echo "BUILDBOT: -> updating $i distribution"
-			DIST=`echo $i | perl -pi -e 's#-(i386|amd64)##'`
-			case "$1" in
-				--nightly) 	mkdir -p /home/buildbot/distribution/pool/$DIST/nightly/m/mc
-							mv -f /var/cache/pbuilder/result-$i/*.deb /home/buildbot/distribution/pool/$DIST/nightly/m/mc
-							echo $i | grep -q 'i386$' && \
-							mv -f /var/cache/pbuilder/result-$i/* /home/buildbot/distribution/pool/$DIST/nightly/m/mc
-							;;
-				--release)	mkdir -p /home/buildbot/distribution/pool/$DIST/main/m/mc
-							mv -f /var/cache/pbuilder/result-$i/*.deb /home/buildbot/distribution/pool/$DIST/main/m/mc
-							echo $i | grep -q 'i386$' && \
-							mv -f /var/cache/pbuilder/result-$i/* /home/buildbot/distribution/pool/$DIST/main/m/mc
-			esac
-			rm -f /var/cache/pbuilder/result-$i/mc_*
-		}
-	done
+	case "$1" in
+		--release) /home/buildbot/buildbot-build-target.sh --build release --target all --src /home/buildbot/mc-build/mc_*.dsc;;
+		--nightly) /home/buildbot/buildbot-build-target.sh --build nightly --target all --src /home/buildbot/mc-build/mc_*.dsc;;
+	esac
 } || echo "BUILDBOT: piuparts check failed. Skipping target builds"
 
 echo "BUILDBOT: All finished"
 
-# Fixxing rights
+# Fix permissions
 if [ -d /home/buildbot/distribution ]; then
 	find /home/buildbot/distribution -type d -print0 | xargs -r0 chmod 755
 	find /home/buildbot/distribution -type f -print0 | xargs -r0 chmod 644
