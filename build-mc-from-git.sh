@@ -49,7 +49,7 @@ if [ -r ${MC_BUILD_PREFIX}/.series/nightly -a "${MC_BUILD_TYPE}" == "--nightly" 
 	grep -q "^$LAST_GIT_COMMIT" ${MC_BUILD_PREFIX}/.series/nightly && {
 		echo "BUILDBOT: Nightly build for commit $LAST_GIT_COMMIT already done."
 		echo "BUILDBOT: Remove ${MC_BUILD_PREFIX}/.series/nightly if you want to force build"
-		exit 10
+		exit 1
 	}
 fi
 

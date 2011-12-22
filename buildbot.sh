@@ -18,7 +18,10 @@ rm -fr /home/buildbot/mc-build
 case "$1" in
 	--nightly) sudo pbuilder --execute --configfile /etc/pbuilder/buildbot -- /home/buildbot/initial-build.sh --nightly;;
 	--release) sudo pbuilder --execute --configfile /etc/pbuilder/buildbot -- /home/buildbot/initial-build.sh --release "$2";;
-	*) exit 1;;
+	*)
+		echo "$0: Incorrect option supplied"
+		exit 1
+		;;
 esac || {
 	echo "BUILDBOT: Initial build failed!"
 	rm -fr /home/buildbot/mc-build

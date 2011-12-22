@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -e
 echo "Started at `date -R`"
 
 [ -x ~/bin/prepare-environment.sh ] && ~/bin/prepare-environment.sh
@@ -12,9 +11,6 @@ case $? in
 	0)
 		echo "Build completed without error, starting repository update"
 		break
-		;;
-	10) echo "Successfully ended at `date -R`"
-		exit 0
 		;;
 	*)
 		[ -f $HOME/tmp/nightly-builds.log ] && grep ^BUILDBOT $HOME/tmp/nightly-builds.log
