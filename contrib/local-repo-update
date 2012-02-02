@@ -9,6 +9,10 @@ set -e
 export LC_ALL=C
 export LANG=C
 
+if [ -r ~/bin/prepare-environment.sh ]; then
+	. ~/bin/prepare-environment.sh
+fi
+
 APT_COMMON_CONF="$HOME/.apt-ftparchive-common.conf"
 APT_LENNY_CONF="$HOME/.apt-ftparchive-lenny.conf"
 APT_SQUEEZE_CONF="$HOME/.apt-ftparchive-squeeze.conf"
