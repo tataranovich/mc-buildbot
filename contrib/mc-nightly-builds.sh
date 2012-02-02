@@ -10,7 +10,6 @@ sudo -u buildbot /home/buildbot/buildbot.sh --nightly >$HOME/tmp/nightly-builds.
 case $? in
 	0)
 		echo "Build completed without error, starting repository update"
-		break
 		;;
 	*)
 		[ -f $HOME/tmp/nightly-builds.log ] && grep ^BUILDBOT $HOME/tmp/nightly-builds.log
