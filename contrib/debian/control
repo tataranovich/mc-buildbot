@@ -11,6 +11,7 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: mime-support
 Suggests: perl, zip, unzip, bzip2, links | w3m | lynx, arj, file, xpdf-reader | pdf-viewer, dbview, odt2txt, gv, catdvi, djvulibre-bin, imagemagick, python, python-boto, python-tz
+Conflicts: mc-data
 Description: Midnight Commander - a powerful file manager
  GNU Midnight Commander is a text-mode full-screen file manager. It
  uses a two panel interface and a subshell for command execution. It
