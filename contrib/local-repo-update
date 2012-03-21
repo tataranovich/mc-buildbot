@@ -9,6 +9,14 @@ set -e
 export LC_ALL=C
 export LANG=C
 
+if [ -r ~/bin/prepare-environment.sh ]; then
+	. ~/bin/prepare-environment.sh
+fi
+
+if [ -x ~/bin/cleanup-nightly-builds.sh ]; then
+	~/bin/cleanup-nightly-builds.sh
+fi
+
 APT_COMMON_CONF="$HOME/.apt-ftparchive-common.conf"
 APT_LENNY_CONF="$HOME/.apt-ftparchive-lenny.conf"
 APT_SQUEEZE_CONF="$HOME/.apt-ftparchive-squeeze.conf"
@@ -37,7 +45,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/lenny ]; then
 	cd ${APT_REPO_PREFIX}/dists/lenny
 	apt-ftparchive -c ${APT_LENNY_CONF} release . > Release
 	rm -f Release.gpg
-	gpg --batch --output Release.gpg -ba Release
+	gpg --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/squeeze ]; then
@@ -45,7 +53,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/squeeze ]; then
 	cd ${APT_REPO_PREFIX}/dists/squeeze
 	apt-ftparchive -c ${APT_SQUEEZE_CONF} release . > Release
 	rm -f Release.gpg
-	gpg --batch --output Release.gpg -ba Release
+	gpg --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/wheezy ]; then
@@ -53,7 +61,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/wheezy ]; then
 	cd ${APT_REPO_PREFIX}/dists/wheezy
 	apt-ftparchive -c ${APT_WHEEZY_CONF} release . > Release
 	rm -f Release.gpg
-	gpg --batch --output Release.gpg -ba Release
+	gpg --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/sid ]; then
@@ -61,7 +69,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/sid ]; then
 	cd ${APT_REPO_PREFIX}/dists/sid
 	apt-ftparchive -c ${APT_SID_CONF} release . > Release
 	rm -f Release.gpg
-	gpg --batch --output Release.gpg -ba Release
+	gpg --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/lucid ]; then
@@ -69,7 +77,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/lucid ]; then
     cd ${APT_REPO_PREFIX}/dists/lucid
     apt-ftparchive -c ${APT_LUCID_CONF} release . > Release
     rm -f Release.gpg
-    gpg --batch --output Release.gpg -ba Release
+    gpg --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/maverick ]; then
@@ -77,7 +85,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/maverick ]; then
     cd ${APT_REPO_PREFIX}/dists/maverick
     apt-ftparchive -c ${APT_MAVERICK_CONF} release . > Release
     rm -f Release.gpg
-    gpg --batch --output Release.gpg -ba Release
+    gpg --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/natty ]; then
@@ -85,7 +93,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/natty ]; then
     cd ${APT_REPO_PREFIX}/dists/natty
     apt-ftparchive -c ${APT_NATTY_CONF} release . > Release
     rm -f Release.gpg
-    gpg --batch --output Release.gpg -ba Release
+    gpg --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/oneiric ]; then
@@ -93,7 +101,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/oneiric ]; then
     cd ${APT_REPO_PREFIX}/dists/oneiric
     apt-ftparchive -c ${APT_ONEIRIC_CONF} release . > Release
     rm -f Release.gpg
-    gpg --batch --output Release.gpg -ba Release
+    gpg --batch --no-tty --output Release.gpg -ba Release
 fi
 
 # Fix permissions
