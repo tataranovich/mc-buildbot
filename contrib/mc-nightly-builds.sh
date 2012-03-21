@@ -2,9 +2,7 @@
 
 echo "Started at `date -R`"
 
-if [ -f ~/bin/prepare-environment.sh ]; then
-    . ~/bin/prepare-environment.sh
-fi
+[ -x ~/bin/prepare-environment.sh ] && ~/bin/prepare-environment.sh
 
 # Try to build with buildbot
 sudo -u buildbot /home/buildbot/buildbot.sh --nightly >$HOME/tmp/nightly-builds.log 2>&1
