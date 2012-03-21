@@ -3,7 +3,9 @@
 set -e
 echo "Started at `date -R`"
 
-[ -x ~/bin/prepare-environment.sh ] && ~/bin/prepare-environment.sh
+if [ -f ~/bin/prepare-environment.sh ]; then
+    . ~/bin/prepare-environment.sh
+fi
 
 # Cleanup
 rm -f /home/buildbot/tmp/uscan/mc*tar.*
