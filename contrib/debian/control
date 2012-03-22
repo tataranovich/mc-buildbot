@@ -8,11 +8,9 @@ Homepage: http://www.midnight-commander.org
 
 Package: mc
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: mc-data (=${source:Version}), ${shlibs:Depends}, ${misc:Depends}
 Recommends: mime-support
 Suggests: perl, zip, unzip, bzip2, links | w3m | lynx, arj, file, xpdf-reader | pdf-viewer, dbview, odt2txt, gv, catdvi, djvulibre-bin, imagemagick, python, python-boto, python-tz
-Conflicts: mc-data
-Replaces: mc-data
 Description: Midnight Commander - a powerful file manager
  GNU Midnight Commander is a text-mode full-screen file manager. It
  uses a two panel interface and a subshell for command execution. It
@@ -20,6 +18,21 @@ Description: Midnight Commander - a powerful file manager
  viewer with support for binary files. Also included is Virtual
  Filesystem (VFS), that allows files on remote systems (e.g. FTP, SSH
  servers) and files inside archives to be manipulated like real files.
+
+Package: mc-data                                                                                                                                                                   
+Architecture: all                                                                                                                                                                  
+Breaks: mc (<< 3:4.8.1)                                                                                                                                                            
+Replaces: mc (<< 3:4.8.1)                                                                                                                                                          
+Depends: ${misc:Depends}                                                                                                                                                           
+Description: Midnight Commander - a powerful file manager -- data files                                                                                                            
+ GNU Midnight Commander is a text-mode full-screen file manager. It                                                                                                                
+ uses a two panel interface and a subshell for command execution. It                                                                                                               
+ includes an internal editor with syntax highlighting and an internal                                                                                                              
+ viewer with support for binary files. Also included is Virtual                                                                                                                    
+ Filesystem (VFS), that allows files on remote systems (e.g. FTP, SSH                                                                                                              
+ servers) and files inside archives to be manipulated like real files.                                                                                                             
+ .                                                                                                                                                                                 
+ This package provides architecture independent files
 
 Package: mc-dbg
 Architecture: any

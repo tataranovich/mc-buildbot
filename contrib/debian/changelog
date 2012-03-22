@@ -1,3 +1,15 @@
+mc (3:4.8.2-2) unstable; urgency=low
+
+  * Package mc splited into two packages: mc and mc-data
+
+ -- Andrey Tataranovich <tataranovich@gmail.com>  Wed, 21 Mar 2012 23:16:57 +0300
+
+mc (3:4.8.2-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Andrey Tataranovich <tataranovich@gmail.com>  Tue, 20 Mar 2012 15:33:14 +0000
+
 mc (3:4.7.5.5-2) unstable; urgency=low
 
   * New upstream release.
