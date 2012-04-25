@@ -26,6 +26,7 @@ APT_LUCID_CONF="$HOME/.apt-ftparchive-lucid.conf"
 APT_MAVERICK_CONF="$HOME/.apt-ftparchive-maverick.conf"
 APT_NATTY_CONF="$HOME/.apt-ftparchive-natty.conf"
 APT_ONEIRIC_CONF="$HOME/.apt-ftparchive-oneiric.conf"
+APT_PRECISE_CONF="$HOME/.apt-ftparchive-precise.conf"
 APT_REPO_PREFIX="$HOME/my-local-repo"
 
 # Currently I didn't know how to use them properly, so I simply
@@ -100,6 +101,14 @@ if [ -d ${APT_REPO_PREFIX}/dists/oneiric ]; then
     echo "Processing Oneiric release"
     cd ${APT_REPO_PREFIX}/dists/oneiric
     apt-ftparchive -c ${APT_ONEIRIC_CONF} release . > Release
+    rm -f Release.gpg
+    gpg --batch --no-tty --output Release.gpg -ba Release
+fi
+
+if [ -d ${APT_REPO_PREFIX}/dists/precise ]; then
+    echo "Processing Precise release"
+    cd ${APT_REPO_PREFIX}/dists/precise
+    apt-ftparchive -c ${APT_PRECISE_CONF} release . > Release
     rm -f Release.gpg
     gpg --batch --no-tty --output Release.gpg -ba Release
 fi
