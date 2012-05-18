@@ -117,5 +117,5 @@ fi
 find ${APT_REPO_PREFIX} -type f -print0 | xargs -r0 chmod 644
 find ${APT_REPO_PREFIX} -type d -print0 | xargs -r0 chmod 755
 
-rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/pool repository:debian/ && \
-rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/dists repository:debian/
+rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/pool repository:/var/www/tataranovich.com/debian/ && \
+rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/dists repository:/var/www/tataranovich.com/debian/
