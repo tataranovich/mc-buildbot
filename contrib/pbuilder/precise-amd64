@@ -1,0 +1,5 @@
+ARCHITECTURE=amd64
+MIRRORSITE=http://ftp.mgts.by/ubuntu
+BASETGZ=/var/cache/pbuilder/base-precise-amd64.tgz
+BUILDRESULT=/var/cache/pbuilder/result-precise-amd64/
+DISTRIBUTION=precise

@@ -26,6 +26,7 @@ APT_LUCID_CONF="$HOME/.apt-ftparchive-lucid.conf"
 APT_MAVERICK_CONF="$HOME/.apt-ftparchive-maverick.conf"
 APT_NATTY_CONF="$HOME/.apt-ftparchive-natty.conf"
 APT_ONEIRIC_CONF="$HOME/.apt-ftparchive-oneiric.conf"
+APT_PRECISE_CONF="$HOME/.apt-ftparchive-precise.conf"
 APT_REPO_PREFIX="$HOME/my-local-repo"
 
 # Currently I didn't know how to use them properly, so I simply
@@ -104,9 +105,17 @@ if [ -d ${APT_REPO_PREFIX}/dists/oneiric ]; then
     gpg --batch --no-tty --output Release.gpg -ba Release
 fi
 
+if [ -d ${APT_REPO_PREFIX}/dists/precise ]; then
+    echo "Processing Precise release"
+    cd ${APT_REPO_PREFIX}/dists/precise
+    apt-ftparchive -c ${APT_PRECISE_CONF} release . > Release
+    rm -f Release.gpg
+    gpg --batch --no-tty --output Release.gpg -ba Release
+fi
+
 # Fix permissions
 find ${APT_REPO_PREFIX} -type f -print0 | xargs -r0 chmod 644
 find ${APT_REPO_PREFIX} -type d -print0 | xargs -r0 chmod 755
 
-rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/pool repository:debian/ && \
-rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/dists repository:debian/
+rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/pool repository:/var/www/tataranovich.com/debian/ && \
+rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/dists repository:/var/www/tataranovich.com/debian/

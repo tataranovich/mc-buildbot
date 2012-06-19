@@ -1,0 +1,5 @@
+ARCHITECTURE=i386
+MIRRORSITE=http://ftp.mgts.by/ubuntu
+BASETGZ=/var/cache/pbuilder/base-precise-i386.tgz
+BUILDRESULT=/var/cache/pbuilder/result-precise-i386/
+DISTRIBUTION=precise
