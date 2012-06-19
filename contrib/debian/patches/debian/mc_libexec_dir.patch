@@ -1,0 +1,12 @@
+diff -uNrp mc.orig//configure.ac mc//configure.ac
+--- mc.orig//configure.ac	2012-06-19 06:59:22.988085162 +0000
++++ mc//configure.ac	2012-06-19 07:02:04.844084065 +0000
+@@ -482,7 +482,7 @@ dnl Libraries used only when building th
+ AC_SUBST(MCLIBS)
+ 
+ 
+-EXTHELPERSDIR=${prefix}/libexec/${PACKAGE}/ext.d
++EXTHELPERSDIR=${libexecdir}/${PACKAGE}/ext.d
+ AC_SUBST(EXTHELPERSDIR)
+ 
+ MAN_DATE="$(LC_ALL=C date "+%B %Y")"
