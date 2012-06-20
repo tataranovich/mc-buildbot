@@ -1,5 +1,5 @@
 ARCHITECTURE=i386
-MIRRORSITE=http://ftp.mgts.by/debian
+MIRRORSITE=http://ftp.debian.org/debian
 BASETGZ=/var/cache/pbuilder/base-lenny-i386.tgz
 BUILDRESULT=/var/cache/pbuilder/result-lenny-i386/
 DISTRIBUTION=lenny

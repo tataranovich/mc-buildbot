@@ -1,5 +1,5 @@
 ARCHITECTURE=amd64
-MIRRORSITE=http://ftp.mgts.by/ubuntu
+MIRRORSITE=http://ftp.ubuntu.com/ubuntu
 BASETGZ=/var/cache/pbuilder/base-maverick-amd64.tgz
 BUILDRESULT=/var/cache/pbuilder/result-maverick-amd64/
 DISTRIBUTION=maverick

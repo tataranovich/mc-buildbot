@@ -1,5 +1,5 @@
 ARCHITECTURE=i386
-MIRRORSITE=http://ftp.mgts.by/ubuntu
+MIRRORSITE=http://ftp.ubuntu.com/ubuntu
 BASETGZ=/var/cache/pbuilder/base-natty-i386.tgz
 BUILDRESULT=/var/cache/pbuilder/result-natty-i386/
 DISTRIBUTION=natty

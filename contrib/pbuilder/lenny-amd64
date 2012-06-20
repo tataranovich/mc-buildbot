@@ -1,5 +1,5 @@
 ARCHITECTURE=amd64
-MIRRORSITE=http://ftp.mgts.by/debian
+MIRRORSITE=http://ftp.debian.org/debian
 BASETGZ=/var/cache/pbuilder/base-lenny-amd64.tgz
 BUILDRESULT=/var/cache/pbuilder/result-lenny-amd64/
 DISTRIBUTION=lenny

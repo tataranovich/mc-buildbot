@@ -1,5 +1,5 @@
 ARCHITECTURE=amd64
-MIRRORSITE=http://ftp.mgts.by/ubuntu
+MIRRORSITE=http://ftp.ubuntu.com/ubuntu
 BASETGZ=/var/cache/pbuilder/base-natty-amd64.tgz
 BUILDRESULT=/var/cache/pbuilder/result-natty-amd64/
 DISTRIBUTION=natty

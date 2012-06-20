@@ -1,5 +1,5 @@
 ARCHITECTURE=amd64
-MIRRORSITE=http://ftp.mgts.by/debian
+MIRRORSITE=http://ftp.debian.org/debian
 BASETGZ=/var/cache/pbuilder/base-wheezy-amd64.tgz
 BUILDRESULT=/var/cache/pbuilder/result-wheezy-amd64/
 DISTRIBUTION=wheezy
