@@ -4,7 +4,7 @@ include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/autotools.mk
 
 DEB_DH_STRIP_ARGS := --dbg-package=mc-dbg
-DEB_CONFIGURE_EXTRA_FLAGS := --with-x --with-screen=slang --libexecdir='$${prefix}/lib' --disable-rpath --disable-static
+DEB_CONFIGURE_EXTRA_FLAGS := --libexecdir="$${prefix}/lib" --with-x --with-screen=slang --disable-rpath --disable-static
 AWK := awk
 
 # If DEB_BUILD_OPTIONS=parallel=n, build in n parallel processes
@@ -15,6 +15,9 @@ endif
 
 DEB_FIXPERMS_EXCLUDE := /usr/lib/mc/cons.saver
 
+makebuilddir/mc::
+	dh_autoreconf
+
 binary-post-install/mc::
 	chmod 644 ./debian/mc/usr/share/mc/bin/mc*
 	chmod 755 ./debian/mc/etc/mc/edit.spell.rc
@@ -24,3 +27,6 @@ binary-post-install/mc::
 	chmod g+s ./debian/mc/usr/lib/mc/cons.saver || true
 
 	chmod 644 ./debian/mc/usr/lib/mc/fish/*
+
+cleanbuilddir/mc::
+	dh_autoreconf_clean
