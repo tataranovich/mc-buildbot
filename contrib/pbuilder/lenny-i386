@@ -1,5 +1,6 @@
 ARCHITECTURE=i386
-MIRRORSITE=http://ftp.debian.org/debian
+MIRRORSITE=http://snapshot.debian.org/archive/debian/20120324T222623Z/
+OTHERMIRROR="deb http://snapshot.debian.org/archive/debian-security/20120324T222623Z/ lenny/updates main"
 BASETGZ=/var/cache/pbuilder/base-lenny-i386.tgz
 BUILDRESULT=/var/cache/pbuilder/result-lenny-i386/
 DISTRIBUTION=lenny
