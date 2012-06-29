@@ -32,8 +32,12 @@ echo "BUILDBOT: Start checking with piuparts"
 sudo piuparts --basetgz /var/cache/pbuilder/base-squeeze-i386.tgz -d squeeze /home/buildbot/mc-build/mc_*.changes && {
 	echo "BUILDBOT: piuparts check sucessfull, starting target builds"
 	case "$1" in
-		--release) /home/buildbot/buildbot-build-target.sh --build release --target all --src /home/buildbot/mc-build/mc_*.dsc;;
-		--nightly) /home/buildbot/buildbot-build-target.sh --build nightly --target all --src /home/buildbot/mc-build/mc_*.dsc;;
+		--release)
+			/home/buildbot/target-build.sh --target all --src /home/buildbot/mc-build/mc_*.dsc --repository main/m/mc --output /home/buildbot/distribution/pool
+			;;
+		--nightly)
+			/home/buildbot/target-build.sh --target all --src /home/buildbot/mc-build/mc_*.dsc --repository nightly/m/mc --output /home/buildbot/distribution/pool
+			;;
 	esac
 } || echo "BUILDBOT: piuparts check failed. Skipping target builds"
 
