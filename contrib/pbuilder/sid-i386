@@ -3,3 +3,4 @@ MIRRORSITE=http://ftp.debian.org/debian
 BASETGZ=/var/cache/pbuilder/base-sid-i386.tgz
 BUILDRESULT=/var/cache/pbuilder/result-sid-i386/
 DISTRIBUTION=sid
+COMPONENTS="main contrib non-free"

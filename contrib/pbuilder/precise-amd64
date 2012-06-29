@@ -1,5 +1,7 @@
 ARCHITECTURE=amd64
 MIRRORSITE=http://ftp.ubuntu.com/ubuntu
+OTHERMIRROR="deb http://ftp.ubuntu.com/ubuntu precise-security main universe multiverse restricted"
 BASETGZ=/var/cache/pbuilder/base-precise-amd64.tgz
 BUILDRESULT=/var/cache/pbuilder/result-precise-amd64/
 DISTRIBUTION=precise
+COMPONENTS="main universe multiverse restricted"
