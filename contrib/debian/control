@@ -2,7 +2,7 @@ Source: mc
 Section: utils
 Priority: optional
 Maintainer: Andrey Tataranovich <tataranovich@gmail.com>
-Build-Depends: debhelper (>= 7), cdbs, gettext, libglib2.0-dev, libgpm-dev | not+linux-gnu, libslang2-dev (>> 2.1), libx11-dev, e2fslibs-dev, libssh2-1-dev (>= 1.2.5), unzip, dh-autoreconf, autopoint
+Build-Depends: debhelper (>= 7), cdbs, gettext, libglib2.0-dev, libgpm-dev | not+linux-gnu, libslang2-dev (>> 2.1), libx11-dev, e2fslibs-dev, libssh2-1-dev (>= 1.2.5), unzip
 Standards-Version: 3.9.1
 Homepage: http://www.midnight-commander.org
 

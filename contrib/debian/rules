@@ -16,8 +16,8 @@ endif
 
 DEB_FIXPERMS_EXCLUDE := /usr/lib/mc/cons.saver
 
-makebuilddir/mc::
-	dh_autoreconf
+#makebuilddir/mc::
+#	dh_autoreconf
 
 binary-post-install/mc::
 	chmod 644 ./debian/mc/usr/share/mc/bin/mc*
@@ -29,5 +29,5 @@ binary-post-install/mc::
 
 	chmod 644 ./debian/mc/usr/lib/mc/fish/*
 
-cleanbuilddir/mc::
-	dh_autoreconf_clean
+#cleanbuilddir/mc::
+#	dh_autoreconf_clean
