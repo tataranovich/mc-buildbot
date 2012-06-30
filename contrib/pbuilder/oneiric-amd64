@@ -1,6 +1,6 @@
 ARCHITECTURE=amd64
 MIRRORSITE=http://ftp.ubuntu.com/ubuntu
-OTHERMIRROR="deb http://ftp.ubuntu.com/ubuntu oneiric-security main universe multiverse restricted"
+OTHERMIRROR="deb http://ftp.ubuntu.com/ubuntu oneiric-security main universe multiverse restricted|deb http://www.tataranovich.com/debian oneiric backports"
 BASETGZ=/var/cache/pbuilder/base-oneiric-amd64.tgz
 BUILDRESULT=/var/cache/pbuilder/result-oneiric-amd64/
 DISTRIBUTION=oneiric
