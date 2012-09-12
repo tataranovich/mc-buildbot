@@ -2,12 +2,14 @@ Source: mc
 Section: utils
 Priority: optional
 Maintainer: Andrey Tataranovich <tataranovich@gmail.com>
-Build-Depends: debhelper (>= 7), cdbs, gettext, libglib2.0-dev, libgpm-dev | not+linux-gnu, libslang2-dev (>> 2.1), libx11-dev, e2fslibs-dev, libssh2-1-dev (>= 1.2.5), unzip
+Build-Depends: debhelper (>= 7), cdbs, gettext, libglib2.0-dev, libgpm-dev | not+linux-gnu, libslang2-dev (>> 2.1), libx11-dev, e2fslibs-dev, libssh2-1-dev (>= 1.2.5), unzip, libaspell-dev
 Standards-Version: 3.9.1
 Homepage: http://www.midnight-commander.org
 
 Package: mc
 Architecture: any
+Breaks: mc (<< 3:4.8.1)
+Replaces: mc (<< 3:4.8.1)
 Depends: mc-data (=${source:Version}), ${shlibs:Depends}, ${misc:Depends}
 Recommends: mime-support
 Suggests: perl, zip, unzip, bzip2, links | w3m | lynx, arj, file, xpdf-reader | pdf-viewer, dbview, odt2txt, gv, catdvi, djvulibre-bin, imagemagick, python, python-boto, python-tz
