@@ -1,8 +1,8 @@
 ARCHITECTURE=i386
 MIRRORSITE=http://ftp.ubuntu.com/ubuntu
 OTHERMIRROR="deb http://ftp.ubuntu.com/ubuntu precise-security main universe multiverse restricted"
-BASETGZ=/var/cache/pbuilder/base-precise-i386.tgz
-BUILDRESULT=/var/cache/pbuilder/result-precise-i386/
-DISTRIBUTION=precise
+BASETGZ=/var/cache/pbuilder/base-quantal-i386.tgz
+BUILDRESULT=/var/cache/pbuilder/result-quantal-i386/
+DISTRIBUTION=quantal
 COMPONENTS="main universe multiverse restricted"
 DEBOOTSTRAPOPTS=( '--keyring=/etc/pbuilder/ubuntu-archive-keyring.gpg' )
