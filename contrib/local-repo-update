@@ -5,16 +5,71 @@
 
 set -e
 
-# Variables definition
 export LC_ALL=C
 export LANG=C
 
+__warn() {
+	if [ ! -z "$1" ]; then
+		echo "$1" >&2
+	fi
+}
+
+__die() {
+	__warn "$1"
+	exit 1
+}
+
+__debug() {
+	if [ $# -lt 2 ]; then
+		if [ $__DEBUG != 0 ]; then
+			__warn "$1"
+		fi
+	else
+		if [ $1 -ge $__DEBUG ]; then
+			__warn "$2"
+		fi
+	fi
+}
+
+parseCmdline() {
+	while [ $# -gt 0 ]
+	do
+		PARAM="$1"
+		case "$PARAM" in
+			--upload-only)
+				__UPLOAD_ONLY="yes"
+				shift
+				;;
+			--debug)
+				if [ $# -gt 1 ]; then
+					__DEBUG="$2"
+					shift
+				else
+					__DEBUG=1
+				fi
+				;;
+			*)
+				__die "Incorrect parameter supplied: $PARAM"
+				;;
+		esac
+	done
+}
+
+fixPermissions() {
+	find ${APT_REPO_PREFIX} -type f -print0 | xargs -r0 chmod 644
+	find ${APT_REPO_PREFIX} -type d -print0 | xargs -r0 chmod 755
+}
+
+uploadRepository() {
+	fixPermissions
+	rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/pool repository:/var/www/tataranovich.com/debian/ && \
+	rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/dists repository:/var/www/tataranovich.com/debian/
+}
+
+parseCmdline $@
+
 if [ -r ~/bin/prepare-environment.sh ]; then
 	. ~/bin/prepare-environment.sh
-fi
-
-if [ -x ~/bin/cleanup-nightly-builds.sh ]; then
-	~/bin/cleanup-nightly-builds.sh
 fi
 
 APT_COMMON_CONF="$HOME/.apt-ftparchive-common.conf"
@@ -29,6 +84,16 @@ APT_ONEIRIC_CONF="$HOME/.apt-ftparchive-oneiric.conf"
 APT_PRECISE_CONF="$HOME/.apt-ftparchive-precise.conf"
 APT_QUANTAL_CONF="$HOME/.apt-ftparchive-quantal.conf"
 APT_REPO_PREFIX="$HOME/my-local-repo"
+
+if [ "$__UPLOAD_ONLY" = "yes" ]; then
+	__debug "Only syncing local and remote repository"
+	uploadRepository
+	exit $?
+fi
+
+if [ -x ~/bin/cleanup-nightly-builds.sh ]; then
+	~/bin/cleanup-nightly-builds.sh
+fi
 
 # Currently I didn't know how to use them properly, so I simply
 # delete all of them before repo rescan.
@@ -122,9 +187,4 @@ if [ -d ${APT_REPO_PREFIX}/dists/quantal ]; then
     gpg --batch --no-tty --output Release.gpg -ba Release
 fi
 
-# Fix permissions
-find ${APT_REPO_PREFIX} -type f -print0 | xargs -r0 chmod 644
-find ${APT_REPO_PREFIX} -type d -print0 | xargs -r0 chmod 755
-
-rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/pool repository:/var/www/tataranovich.com/debian/ && \
-rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/dists repository:/var/www/tataranovich.com/debian/
+uploadRepository
