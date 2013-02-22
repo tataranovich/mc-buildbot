@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # This script updates my local debian repository
 #
@@ -21,7 +21,7 @@ __die() {
 
 __debug() {
 	if [ $# -lt 2 ]; then
-		if [ $__DEBUG != 0 ]; then
+		if [ ! -z "$__DEBUG" ]; then
 			__warn "$1"
 		fi
 	else
@@ -62,8 +62,15 @@ fixPermissions() {
 
 uploadRepository() {
 	fixPermissions
-	rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/pool repository:/var/www/tataranovich.com/debian/ && \
-	rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/dists repository:/var/www/tataranovich.com/debian/
+
+	# Check if script run in interactive mode
+	if [ -t 0 -o -p /dev/stdin ]; then
+		rsync -aPz --delete --delete-after ${APT_REPO_PREFIX}/pool repository:/var/www/tataranovich.com/debian/ && \
+		rsync -aPz --delete --delete-after --exclude='*.db' --delete-excluded ${APT_REPO_PREFIX}/ repository:/var/www/tataranovich.com/debian/
+	else
+		rsync -az --partial --delete-after ${APT_REPO_PREFIX}/pool repository:/var/www/tataranovich.com/debian/ && \
+                rsync -az --delete --delete-after --exclude='*.db' --delete-excluded ${APT_REPO_PREFIX}/ repository:/var/www/tataranovich.com/debian/
+	fi
 }
 
 parseCmdline $@
@@ -85,7 +92,7 @@ APT_PRECISE_CONF="$HOME/.apt-ftparchive-precise.conf"
 APT_QUANTAL_CONF="$HOME/.apt-ftparchive-quantal.conf"
 APT_REPO_PREFIX="$HOME/my-local-repo"
 
-if [ "$__UPLOAD_ONLY" = "yes" ]; then
+if [ "$__UPLOAD_ONLY" == "yes" ]; then
 	__debug "Only syncing local and remote repository"
 	uploadRepository
 	exit $?
@@ -186,5 +193,9 @@ if [ -d ${APT_REPO_PREFIX}/dists/quantal ]; then
     rm -f Release.gpg
     gpg --batch --no-tty --output Release.gpg -ba Release
 fi
+
+# Currently I didn't know how to use them properly, so I simply
+# delete all of them before repo rescan.
+rm -f ${APT_REPO_PREFIX}/*.db
 
 uploadRepository
