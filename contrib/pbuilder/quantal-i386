@@ -1,6 +1,6 @@
 ARCHITECTURE=i386
 MIRRORSITE=http://ftp.ubuntu.com/ubuntu
-OTHERMIRROR="deb http://ftp.ubuntu.com/ubuntu precise-security main universe multiverse restricted"
+OTHERMIRROR="deb http://ftp.ubuntu.com/ubuntu quantal-security main universe multiverse restricted"
 BASETGZ=/var/cache/pbuilder/base-quantal-i386.tgz
 BUILDRESULT=/var/cache/pbuilder/result-quantal-i386/
 DISTRIBUTION=quantal

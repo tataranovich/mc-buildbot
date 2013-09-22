@@ -1,0 +1,8 @@
+ARCHITECTURE=i386
+MIRRORSITE=http://ftp.ubuntu.com/ubuntu
+OTHERMIRROR="deb http://ftp.ubuntu.com/ubuntu saucy-security main universe multiverse restricted"
+BASETGZ=/var/cache/pbuilder/base-saucy-i386.tgz
+BUILDRESULT=/var/cache/pbuilder/result-saucy-i386/
+DISTRIBUTION=saucy
+COMPONENTS="main universe multiverse restricted"
+DEBOOTSTRAPOPTS=( '--keyring=/etc/pbuilder/ubuntu-archive-keyring.gpg' )
