@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SUPPORTED_TARGETS="squeeze-i386 squeeze-amd64 wheezy-i386 wheezy-amd64 sid-i386 sid-amd64 lucid-i386 lucid-amd64 precise-i386 precise-amd64 quantal-i386 quantal-amd64 raring-i386 raring-amd64 saucy-i386 saucy-amd64"
+SUPPORTED_TARGETS="squeeze-i386 squeeze-amd64 wheezy-i386 wheezy-amd64 jessie-i386 jessie-amd64 sid-i386 sid-amd64 lucid-i386 lucid-amd64 precise-i386 precise-amd64 quantal-i386 quantal-amd64 raring-i386 raring-amd64 saucy-i386 saucy-amd64"
 
 die() {
 	if [ ! -z "$1" ]; then
