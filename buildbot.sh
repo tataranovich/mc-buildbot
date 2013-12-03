@@ -28,9 +28,10 @@ esac || {
 	exit 1
 }
 
-echo "BUILDBOT: Start checking with piuparts"
-sudo piuparts --basetgz /var/cache/pbuilder/base-squeeze-i386.tgz -d squeeze /home/buildbot/mc-build/mc_*.changes && {
-	echo "BUILDBOT: piuparts check sucessfull, starting target builds"
+echo "BUILDBOT: Skipping piuparts check"
+#echo "BUILDBOT: Start checking with piuparts"
+#sudo piuparts --basetgz /var/cache/pbuilder/base-squeeze-i386.tgz -d squeeze /home/buildbot/mc-build/mc_*.changes && {
+#	echo "BUILDBOT: piuparts check sucessfull, starting target builds"
 	case "$1" in
 		--release)
 			/home/buildbot/target-build.sh --target all --src /home/buildbot/mc-build/mc_*.dsc --repository main/m/mc --output /home/buildbot/distribution/pool
@@ -39,7 +40,7 @@ sudo piuparts --basetgz /var/cache/pbuilder/base-squeeze-i386.tgz -d squeeze /ho
 			/home/buildbot/target-build.sh --target all --src /home/buildbot/mc-build/mc_*.dsc --repository nightly/m/mc --output /home/buildbot/distribution/pool
 			;;
 	esac
-} || echo "BUILDBOT: piuparts check failed. Skipping target builds"
+#} || echo "BUILDBOT: piuparts check failed. Skipping target builds"
 
 echo "BUILDBOT: All finished"
 
