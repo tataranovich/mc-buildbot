@@ -1,33 +1,104 @@
-#!/bin/sh
+#!/bin/bash
 #
 # This script updates my local debian repository
 #
 
 set -e
 
-# Variables definition
 export LC_ALL=C
 export LANG=C
+
+__warn() {
+	if [ ! -z "$1" ]; then
+		echo "$1" >&2
+	fi
+}
+
+__die() {
+	__warn "$1"
+	exit 1
+}
+
+__debug() {
+	if [ $# -lt 2 ]; then
+		if [ ! -z "$__DEBUG" ]; then
+			__warn "$1"
+		fi
+	else
+		if [ $1 -ge $__DEBUG ]; then
+			__warn "$2"
+		fi
+	fi
+}
+
+parseCmdline() {
+	while [ $# -gt 0 ]
+	do
+		PARAM="$1"
+		case "$PARAM" in
+			--upload-only)
+				__UPLOAD_ONLY="yes"
+				shift
+				;;
+			--debug)
+				if [ $# -gt 1 ]; then
+					__DEBUG="$2"
+					shift
+				else
+					__DEBUG=1
+				fi
+				;;
+			*)
+				__die "Incorrect parameter supplied: $PARAM"
+				;;
+		esac
+	done
+}
+
+fixPermissions() {
+	find ${APT_REPO_PREFIX} -type f -print0 | xargs -r0 chmod 644
+	find ${APT_REPO_PREFIX} -type d -print0 | xargs -r0 chmod 755
+}
+
+uploadRepository() {
+	fixPermissions
+
+	# Check if script run in interactive mode
+	if [ -t 0 -o -p /dev/stdin ]; then
+		rsync -aPz --delete --delete-after ${APT_REPO_PREFIX}/pool repository:/var/www/tataranovich.com/debian/ && \
+		rsync -aPz --delete --delete-after --exclude='*.db' --delete-excluded ${APT_REPO_PREFIX}/ repository:/var/www/tataranovich.com/debian/
+	else
+		rsync -az --partial --delete-after ${APT_REPO_PREFIX}/pool repository:/var/www/tataranovich.com/debian/ && \
+                rsync -az --delete --delete-after --exclude='*.db' --delete-excluded ${APT_REPO_PREFIX}/ repository:/var/www/tataranovich.com/debian/
+	fi
+}
+
+parseCmdline $@
 
 if [ -r ~/bin/prepare-environment.sh ]; then
 	. ~/bin/prepare-environment.sh
 fi
 
-if [ -x ~/bin/cleanup-nightly-builds.sh ]; then
-	~/bin/cleanup-nightly-builds.sh
-fi
-
 APT_COMMON_CONF="$HOME/.apt-ftparchive-common.conf"
-APT_LENNY_CONF="$HOME/.apt-ftparchive-lenny.conf"
 APT_SQUEEZE_CONF="$HOME/.apt-ftparchive-squeeze.conf"
 APT_WHEEZY_CONF="$HOME/.apt-ftparchive-wheezy.conf"
 APT_SID_CONF="$HOME/.apt-ftparchive-sid.conf"
 APT_LUCID_CONF="$HOME/.apt-ftparchive-lucid.conf"
-APT_MAVERICK_CONF="$HOME/.apt-ftparchive-maverick.conf"
-APT_NATTY_CONF="$HOME/.apt-ftparchive-natty.conf"
-APT_ONEIRIC_CONF="$HOME/.apt-ftparchive-oneiric.conf"
 APT_PRECISE_CONF="$HOME/.apt-ftparchive-precise.conf"
+APT_QUANTAL_CONF="$HOME/.apt-ftparchive-quantal.conf"
+APT_RARING_CONF="$HOME/.apt-ftparchive-raring.conf"
+APT_SAUCY_CONF="$HOME/.apt-ftparchive-saucy.conf"
 APT_REPO_PREFIX="$HOME/my-local-repo"
+
+if [ "$__UPLOAD_ONLY" == "yes" ]; then
+	__debug "Only syncing local and remote repository"
+	uploadRepository
+	exit $?
+fi
+
+if [ -x ~/bin/cleanup-nightly-builds.sh ]; then
+	~/bin/cleanup-nightly-builds.sh
+fi
 
 # Currently I didn't know how to use them properly, so I simply
 # delete all of them before repo rescan.
@@ -40,14 +111,6 @@ if [ ! -x `which apt-ftparchive` ]; then
 fi
 
 apt-ftparchive generate ${APT_COMMON_CONF} 2>&1 | egrep -v 'has no (binary|source) override entry'
-
-if [ -d ${APT_REPO_PREFIX}/dists/lenny ]; then
-	echo "Processing Lenny release"
-	cd ${APT_REPO_PREFIX}/dists/lenny
-	apt-ftparchive -c ${APT_LENNY_CONF} release . > Release
-	rm -f Release.gpg
-	gpg --batch --no-tty --output Release.gpg -ba Release
-fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/squeeze ]; then
 	echo "Processing Squeeze release"
@@ -81,30 +144,6 @@ if [ -d ${APT_REPO_PREFIX}/dists/lucid ]; then
     gpg --batch --no-tty --output Release.gpg -ba Release
 fi
 
-if [ -d ${APT_REPO_PREFIX}/dists/maverick ]; then
-    echo "Processing Maverick release"
-    cd ${APT_REPO_PREFIX}/dists/maverick
-    apt-ftparchive -c ${APT_MAVERICK_CONF} release . > Release
-    rm -f Release.gpg
-    gpg --batch --no-tty --output Release.gpg -ba Release
-fi
-
-if [ -d ${APT_REPO_PREFIX}/dists/natty ]; then
-    echo "Processing Natty release"
-    cd ${APT_REPO_PREFIX}/dists/natty
-    apt-ftparchive -c ${APT_NATTY_CONF} release . > Release
-    rm -f Release.gpg
-    gpg --batch --no-tty --output Release.gpg -ba Release
-fi
-
-if [ -d ${APT_REPO_PREFIX}/dists/oneiric ]; then
-    echo "Processing Oneiric release"
-    cd ${APT_REPO_PREFIX}/dists/oneiric
-    apt-ftparchive -c ${APT_ONEIRIC_CONF} release . > Release
-    rm -f Release.gpg
-    gpg --batch --no-tty --output Release.gpg -ba Release
-fi
-
 if [ -d ${APT_REPO_PREFIX}/dists/precise ]; then
     echo "Processing Precise release"
     cd ${APT_REPO_PREFIX}/dists/precise
@@ -113,9 +152,32 @@ if [ -d ${APT_REPO_PREFIX}/dists/precise ]; then
     gpg --batch --no-tty --output Release.gpg -ba Release
 fi
 
-# Fix permissions
-find ${APT_REPO_PREFIX} -type f -print0 | xargs -r0 chmod 644
-find ${APT_REPO_PREFIX} -type d -print0 | xargs -r0 chmod 755
+if [ -d ${APT_REPO_PREFIX}/dists/quantal ]; then
+    echo "Processing Quantal release"
+    cd ${APT_REPO_PREFIX}/dists/quantal
+    apt-ftparchive -c ${APT_QUANTAL_CONF} release . > Release
+    rm -f Release.gpg
+    gpg --batch --no-tty --output Release.gpg -ba Release
+fi
 
-rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/pool repository:/var/www/tataranovich.com/debian/ && \
-rsync -avz --delete --delete-after ${APT_REPO_PREFIX}/dists repository:/var/www/tataranovich.com/debian/
+if [ -d ${APT_REPO_PREFIX}/dists/raring ]; then
+    echo "Processing Raring release"
+    cd ${APT_REPO_PREFIX}/dists/raring
+    apt-ftparchive -c ${APT_RARING_CONF} release . > Release
+    rm -f Release.gpg
+    gpg --batch --no-tty --output Release.gpg -ba Release
+fi
+
+if [ -d ${APT_REPO_PREFIX}/dists/saucy ]; then
+    echo "Processing Saucy release"
+    cd ${APT_REPO_PREFIX}/dists/saucy
+    apt-ftparchive -c ${APT_SAUCY_CONF} release . > Release
+    rm -f Release.gpg
+    gpg --batch --no-tty --output Release.gpg -ba Release
+fi
+
+# Currently I didn't know how to use them properly, so I simply
+# delete all of them before repo rescan.
+rm -f ${APT_REPO_PREFIX}/*.db
+
+uploadRepository

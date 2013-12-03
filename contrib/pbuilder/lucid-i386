@@ -5,3 +5,4 @@ BASETGZ=/var/cache/pbuilder/base-lucid-i386.tgz
 BUILDRESULT=/var/cache/pbuilder/result-lucid-i386/
 DISTRIBUTION=lucid
 COMPONENTS="main universe multiverse restricted"
+DEBOOTSTRAPOPTS=( '--keyring=/etc/pbuilder/ubuntu-archive-keyring.gpg' )

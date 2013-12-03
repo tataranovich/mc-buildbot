@@ -1,0 +1,8 @@
+ARCHITECTURE=amd64
+MIRRORSITE=http://ftp.ubuntu.com/ubuntu
+OTHERMIRROR="deb http://ftp.ubuntu.com/ubuntu raring-security main universe multiverse restricted"
+BASETGZ=/var/cache/pbuilder/base-raring-amd64.tgz
+BUILDRESULT=/var/cache/pbuilder/result-raring-amd64/
+DISTRIBUTION=raring
+COMPONENTS="main universe multiverse restricted"
+DEBOOTSTRAPOPTS=( '--keyring=/etc/pbuilder/ubuntu-archive-keyring.gpg' )
