@@ -1,0 +1,8 @@
+ARCHITECTURE=i386
+MIRRORSITE=http://ftp.ubuntu.com/ubuntu
+OTHERMIRROR="deb http://ftp.ubuntu.com/ubuntu trusty-security main universe multiverse restricted"
+BASETGZ=/var/cache/pbuilder/base-trusty-i386.tgz
+BUILDRESULT=/var/cache/pbuilder/result-trusty-i386/
+DISTRIBUTION=trusty
+COMPONENTS="main universe multiverse restricted"
+DEBOOTSTRAPOPTS=( '--keyring=/etc/pbuilder/ubuntu-archive-keyring.gpg' )
