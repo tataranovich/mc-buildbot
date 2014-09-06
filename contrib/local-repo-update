@@ -82,6 +82,7 @@ fi
 APT_COMMON_CONF="$HOME/.apt-ftparchive-common.conf"
 APT_SQUEEZE_CONF="$HOME/.apt-ftparchive-squeeze.conf"
 APT_WHEEZY_CONF="$HOME/.apt-ftparchive-wheezy.conf"
+APT_JESSIE_CONF="$HOME/.apt-ftparchive-jessie.conf"
 APT_SID_CONF="$HOME/.apt-ftparchive-sid.conf"
 APT_LUCID_CONF="$HOME/.apt-ftparchive-lucid.conf"
 APT_PRECISE_CONF="$HOME/.apt-ftparchive-precise.conf"
@@ -127,6 +128,14 @@ if [ -d ${APT_REPO_PREFIX}/dists/wheezy ]; then
 	apt-ftparchive -c ${APT_WHEEZY_CONF} release . > Release
 	rm -f Release.gpg
 	gpg --batch --no-tty --output Release.gpg -ba Release
+fi
+
+if [ -d ${APT_REPO_PREFIX}/dists/jessie ]; then
+        echo "Processing Jessie release"
+        cd ${APT_REPO_PREFIX}/dists/jessie
+        apt-ftparchive -c ${APT_JESSIE_CONF} release . > Release
+        rm -f Release.gpg
+        gpg --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/sid ]; then
