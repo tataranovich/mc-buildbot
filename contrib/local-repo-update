@@ -90,6 +90,7 @@ APT_QUANTAL_CONF="$HOME/.apt-ftparchive-quantal.conf"
 APT_RARING_CONF="$HOME/.apt-ftparchive-raring.conf"
 APT_SAUCY_CONF="$HOME/.apt-ftparchive-saucy.conf"
 APT_TRUSTY_CONF="$HOME/.apt-ftparchive-trusty.conf"
+APT_TRUSTY_CONF="$HOME/.apt-ftparchive-utopic.conf"
 APT_REPO_PREFIX="$HOME/my-local-repo"
 
 if [ "$__UPLOAD_ONLY" == "yes" ]; then
@@ -190,6 +191,14 @@ if [ -d ${APT_REPO_PREFIX}/dists/trusty ]; then
     echo "Processing Trusty release"
     cd ${APT_REPO_PREFIX}/dists/trusty
     apt-ftparchive -c ${APT_TRUSTY_CONF} release . > Release
+    rm -f Release.gpg
+    gpg --batch --no-tty --output Release.gpg -ba Release
+fi
+
+if [ -d ${APT_REPO_PREFIX}/dists/utopic ]; then
+    echo "Processing Utopic release"
+    cd ${APT_REPO_PREFIX}/dists/utopic
+    apt-ftparchive -c ${APT_UTOPIC_CONF} release . > Release
     rm -f Release.gpg
     gpg --batch --no-tty --output Release.gpg -ba Release
 fi

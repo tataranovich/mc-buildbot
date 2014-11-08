@@ -12,7 +12,7 @@ fi
 for i in `seq 0 365`
 do
 	GIT_STAMP=`date -d "$i days ago" +'%Y%m%d'`
-	if [ `find ${DEB_POOL_DIR}/squeeze/nightly/m/mc -type f -name "*~git${GIT_STAMP}*.dsc" | wc -l` == 1 ]; then
+	if [ `find ${DEB_POOL_DIR}/*/nightly/m/mc -type f -name "*~git${GIT_STAMP}*.dsc" | wc -l` == 1 ]; then
 		let DEB_NIGHTLY_COUNT=${DEB_NIGHTLY_COUNT}+1
 		if [ ${DEB_NIGHTLY_COUNT} == 7 ]; then
 			DEB_NIGHTLY_LAST=${GIT_STAMP}
