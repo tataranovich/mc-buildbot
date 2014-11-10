@@ -1,8 +1,0 @@
-ARCHITECTURE=amd64
-MIRRORSITE=http://ftp.ubuntu.com/ubuntu
-OTHERMIRROR="deb http://ftp.ubuntu.com/ubuntu quantal-security main universe multiverse restricted"
-BASETGZ=/var/cache/pbuilder/base-quantal-amd64.tgz
-BUILDRESULT=/var/cache/pbuilder/result-quantal-amd64/
-DISTRIBUTION=quantal
-COMPONENTS="main universe multiverse restricted"
-DEBOOTSTRAPOPTS=( '--keyring=/etc/pbuilder/ubuntu-archive-keyring.gpg' )
