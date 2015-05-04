@@ -1,9 +1,9 @@
 ARCHITECTURE=i386
 MIRRORSITE=http://ftp.debian.org/debian
-OTHERMIRROR="deb http://security.debian.org/ squeeze/updates main contrib non-free"
+OTHERMIRROR="deb http://security.debian.org/ wheezy/updates main contrib non-free"
 BASETGZ=/var/cache/pbuilder/base-buildbot.tgz
 BUILDRESULT=/var/cache/pbuilder/result-buildbot/
 BINDMOUNTS=/home/buildbot
 EXTRAPACKAGES="devscripts cdbs quilt fakeroot lintian gettext libglib2.0-dev libgpm-dev libslang2-dev libx11-dev e2fslibs-dev libtool automake autoconf autopoint unzip cvs git mercurial libssh2-1-dev dh-autoreconf libaspell-dev"
-DISTRIBUTION=squeeze
+DISTRIBUTION=wheezy
 COMPONENTS="main contrib non-free"

@@ -86,11 +86,9 @@ APT_JESSIE_CONF="$HOME/.apt-ftparchive-jessie.conf"
 APT_SID_CONF="$HOME/.apt-ftparchive-sid.conf"
 APT_LUCID_CONF="$HOME/.apt-ftparchive-lucid.conf"
 APT_PRECISE_CONF="$HOME/.apt-ftparchive-precise.conf"
-APT_QUANTAL_CONF="$HOME/.apt-ftparchive-quantal.conf"
-APT_RARING_CONF="$HOME/.apt-ftparchive-raring.conf"
-APT_SAUCY_CONF="$HOME/.apt-ftparchive-saucy.conf"
 APT_TRUSTY_CONF="$HOME/.apt-ftparchive-trusty.conf"
-APT_TRUSTY_CONF="$HOME/.apt-ftparchive-utopic.conf"
+APT_UTOPIC_CONF="$HOME/.apt-ftparchive-utopic.conf"
+APT_VIVID_CONF="$HOME/.apt-ftparchive-vivid.conf"
 APT_REPO_PREFIX="$HOME/my-local-repo"
 
 if [ "$__UPLOAD_ONLY" == "yes" ]; then
@@ -163,30 +161,6 @@ if [ -d ${APT_REPO_PREFIX}/dists/precise ]; then
     gpg --batch --no-tty --output Release.gpg -ba Release
 fi
 
-if [ -d ${APT_REPO_PREFIX}/dists/quantal ]; then
-    echo "Processing Quantal release"
-    cd ${APT_REPO_PREFIX}/dists/quantal
-    apt-ftparchive -c ${APT_QUANTAL_CONF} release . > Release
-    rm -f Release.gpg
-    gpg --batch --no-tty --output Release.gpg -ba Release
-fi
-
-if [ -d ${APT_REPO_PREFIX}/dists/raring ]; then
-    echo "Processing Raring release"
-    cd ${APT_REPO_PREFIX}/dists/raring
-    apt-ftparchive -c ${APT_RARING_CONF} release . > Release
-    rm -f Release.gpg
-    gpg --batch --no-tty --output Release.gpg -ba Release
-fi
-
-if [ -d ${APT_REPO_PREFIX}/dists/saucy ]; then
-    echo "Processing Saucy release"
-    cd ${APT_REPO_PREFIX}/dists/saucy
-    apt-ftparchive -c ${APT_SAUCY_CONF} release . > Release
-    rm -f Release.gpg
-    gpg --batch --no-tty --output Release.gpg -ba Release
-fi
-
 if [ -d ${APT_REPO_PREFIX}/dists/trusty ]; then
     echo "Processing Trusty release"
     cd ${APT_REPO_PREFIX}/dists/trusty
@@ -198,6 +172,14 @@ fi
 if [ -d ${APT_REPO_PREFIX}/dists/utopic ]; then
     echo "Processing Utopic release"
     cd ${APT_REPO_PREFIX}/dists/utopic
+    apt-ftparchive -c ${APT_UTOPIC_CONF} release . > Release
+    rm -f Release.gpg
+    gpg --batch --no-tty --output Release.gpg -ba Release
+fi
+
+if [ -d ${APT_REPO_PREFIX}/dists/vivid ]; then
+    echo "Processing Vivid release"
+    cd ${APT_REPO_PREFIX}/dists/vivid
     apt-ftparchive -c ${APT_UTOPIC_CONF} release . > Release
     rm -f Release.gpg
     gpg --batch --no-tty --output Release.gpg -ba Release

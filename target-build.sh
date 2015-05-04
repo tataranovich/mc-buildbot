@@ -1,12 +1,18 @@
 #!/bin/bash
 
-SUPPORTED_TARGETS="squeeze-i386 squeeze-amd64 wheezy-i386 wheezy-amd64 jessie-i386 jessie-amd64 sid-i386 sid-amd64 lucid-i386 lucid-amd64 precise-i386 precise-amd64 trusty-i386 trusty-amd64 utopic-i386 utopic-amd64"
+SUPPORTED_TARGETS="squeeze-i386 squeeze-amd64 wheezy-i386 wheezy-amd64 jessie-i386 jessie-amd64 sid-i386 sid-amd64 lucid-i386 lucid-amd64 precise-i386 precise-amd64 trusty-i386 trusty-amd64 utopic-i386 utopic-amd64 vivid-i386 vivid-amd64"
+
+UNCLEAN_BUILD=0
 
 die() {
-	if [ ! -z "$1" ]; then
-		echo "$1"
-	fi
+    warn "$1"
 	exit 1
+}
+
+warn() {
+    if [ ! -z "$1" ]; then
+		echo "BUILDBOT: $1" >&2
+	fi
 }
 
 show_usage() {
@@ -114,7 +120,8 @@ build_single_target() {
 	find /var/cache/pbuilder/result-$TARGET/ -type f -delete 2>/dev/null || die "Unable to cleanup pbuilder results directory: /var/cache/pbuilder/result-$TARGET"
 	sudo pbuilder --build --configfile "/etc/pbuilder/$TARGET" "$BUILD_SRC"
 	if [ $? != 0 ]; then
-		die "Failed to build `basename $BUILD_SRC` for target $TARGET"
+		warn "Failed to build `basename $BUILD_SRC` for target $TARGET"
+        UNCLEAN_BUILD=1
 	else
 		DIST=`echo $i | perl -pi -e 's#-(i386|amd64)$##'`
 		mkdir -p "$BUILD_OUTPUT/$DIST/$BUILD_REPO_PATH"
@@ -143,4 +150,9 @@ else
 	do
 		build_single_target "$i"
 	done
+fi
+
+if [ "$UNCLEAN_BUILD" -eq 1 ]; then
+    warn "One or more targets were not built"
+    exit 2
 fi

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+BUILDBOT_RES=0
+
 if [ -z "$1" ]; then
 	echo "Usage: $0 <--release|--nightly> [release_distribution]"
 	exit 1
@@ -35,9 +37,11 @@ echo "BUILDBOT: Skipping piuparts check"
 	case "$1" in
 		--release)
 			/home/buildbot/target-build.sh --target all --src /home/buildbot/mc-build/mc_*.dsc --repository main/m/mc --output /home/buildbot/distribution/pool
+            BUILDBOT_RES=$?
 			;;
 		--nightly)
 			/home/buildbot/target-build.sh --target all --src /home/buildbot/mc-build/mc_*.dsc --repository nightly/m/mc --output /home/buildbot/distribution/pool
+            BUILDBOT_RES=$?
 			;;
 	esac
 #} || echo "BUILDBOT: piuparts check failed. Skipping target builds"
@@ -51,4 +55,4 @@ if [ -d /home/buildbot/distribution ]; then
 fi
 
 rm -fr /home/buildbot/mc-build
-exit 0
+exit $BUILDBOT_RES
