@@ -65,11 +65,11 @@ uploadRepository() {
 
 	# Check if script run in interactive mode
 	if [ -t 0 -o -p /dev/stdin ]; then
-		rsync -aPz --delete --delete-after ${APT_REPO_PREFIX}/pool repository:/var/www/tataranovich.com/debian/ && \
-		rsync -aPz --delete --delete-after --exclude='*.db' --delete-excluded ${APT_REPO_PREFIX}/ repository:/var/www/tataranovich.com/debian/
+		rsync -aPz --delete --delete-after ${APT_REPO_PREFIX}/pool repository:/var/vhosts/tataranovich.com/debian/ && \
+		rsync -aPz --delete --delete-after --exclude='*.db' --delete-excluded ${APT_REPO_PREFIX}/ repository:/var/vhosts/tataranovich.com/debian/
 	else
-		rsync -az --partial --delete-after ${APT_REPO_PREFIX}/pool repository:/var/www/tataranovich.com/debian/ && \
-                rsync -az --delete --delete-after --exclude='*.db' --delete-excluded ${APT_REPO_PREFIX}/ repository:/var/www/tataranovich.com/debian/
+		rsync -az --partial --delete-after ${APT_REPO_PREFIX}/pool repository:/var/vhosts/tataranovich.com/debian/ && \
+                rsync -az --delete --delete-after --exclude='*.db' --delete-excluded ${APT_REPO_PREFIX}/ repository:/var/vhosts/tataranovich.com/debian/
 	fi
 }
 
