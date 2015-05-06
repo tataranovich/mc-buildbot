@@ -83,6 +83,7 @@ APT_COMMON_CONF="$HOME/.apt-ftparchive-common.conf"
 APT_SQUEEZE_CONF="$HOME/.apt-ftparchive-squeeze.conf"
 APT_WHEEZY_CONF="$HOME/.apt-ftparchive-wheezy.conf"
 APT_JESSIE_CONF="$HOME/.apt-ftparchive-jessie.conf"
+APT_STRETCH_CONF="$HOME/.apt-ftparchive-stretch.conf"
 APT_SID_CONF="$HOME/.apt-ftparchive-sid.conf"
 APT_LUCID_CONF="$HOME/.apt-ftparchive-lucid.conf"
 APT_PRECISE_CONF="$HOME/.apt-ftparchive-precise.conf"
@@ -137,6 +138,14 @@ if [ -d ${APT_REPO_PREFIX}/dists/jessie ]; then
         gpg --batch --no-tty --output Release.gpg -ba Release
 fi
 
+if [ -d ${APT_REPO_PREFIX}/dists/stretch ]; then
+        echo "Processing Stretch release"
+        cd ${APT_REPO_PREFIX}/dists/stretch
+        apt-ftparchive -c ${APT_STRETCH_CONF} release . > Release
+        rm -f Release.gpg
+        gpg --batch --no-tty --output Release.gpg -ba Release
+fi
+
 if [ -d ${APT_REPO_PREFIX}/dists/sid ]; then
 	echo "Processing Sid release"
 	cd ${APT_REPO_PREFIX}/dists/sid
@@ -180,7 +189,7 @@ fi
 if [ -d ${APT_REPO_PREFIX}/dists/vivid ]; then
     echo "Processing Vivid release"
     cd ${APT_REPO_PREFIX}/dists/vivid
-    apt-ftparchive -c ${APT_UTOPIC_CONF} release . > Release
+    apt-ftparchive -c ${APT_VIVID_CONF} release . > Release
     rm -f Release.gpg
     gpg --batch --no-tty --output Release.gpg -ba Release
 fi

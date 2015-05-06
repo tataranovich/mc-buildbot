@@ -1,0 +1,7 @@
+ARCHITECTURE=i386
+MIRRORSITE=http://ftp.debian.org/debian
+OTHERMIRROR="deb http://security.debian.org/ stretch/updates main contrib non-free"
+BASETGZ=/var/cache/pbuilder/base-stretch-i386.tgz
+BUILDRESULT=/var/cache/pbuilder/result-stretch-i386/
+DISTRIBUTION=stretch
+COMPONENTS="main contrib non-free"
