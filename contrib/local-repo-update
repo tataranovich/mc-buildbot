@@ -8,6 +8,8 @@ set -e
 export LC_ALL=C
 export LANG=C
 
+GPG_KEY=76FB442E
+
 __warn() {
 	if [ ! -z "$1" ]; then
 		echo "$1" >&2
@@ -88,7 +90,6 @@ APT_SID_CONF="$HOME/.apt-ftparchive-sid.conf"
 APT_LUCID_CONF="$HOME/.apt-ftparchive-lucid.conf"
 APT_PRECISE_CONF="$HOME/.apt-ftparchive-precise.conf"
 APT_TRUSTY_CONF="$HOME/.apt-ftparchive-trusty.conf"
-APT_UTOPIC_CONF="$HOME/.apt-ftparchive-utopic.conf"
 APT_VIVID_CONF="$HOME/.apt-ftparchive-vivid.conf"
 APT_REPO_PREFIX="$HOME/my-local-repo"
 
@@ -119,7 +120,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/squeeze ]; then
 	cd ${APT_REPO_PREFIX}/dists/squeeze
 	apt-ftparchive -c ${APT_SQUEEZE_CONF} release . > Release
 	rm -f Release.gpg
-	gpg --batch --no-tty --output Release.gpg -ba Release
+	gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/wheezy ]; then
@@ -127,7 +128,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/wheezy ]; then
 	cd ${APT_REPO_PREFIX}/dists/wheezy
 	apt-ftparchive -c ${APT_WHEEZY_CONF} release . > Release
 	rm -f Release.gpg
-	gpg --batch --no-tty --output Release.gpg -ba Release
+	gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/jessie ]; then
@@ -135,7 +136,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/jessie ]; then
         cd ${APT_REPO_PREFIX}/dists/jessie
         apt-ftparchive -c ${APT_JESSIE_CONF} release . > Release
         rm -f Release.gpg
-        gpg --batch --no-tty --output Release.gpg -ba Release
+        gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/stretch ]; then
@@ -143,7 +144,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/stretch ]; then
         cd ${APT_REPO_PREFIX}/dists/stretch
         apt-ftparchive -c ${APT_STRETCH_CONF} release . > Release
         rm -f Release.gpg
-        gpg --batch --no-tty --output Release.gpg -ba Release
+        gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/sid ]; then
@@ -151,7 +152,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/sid ]; then
 	cd ${APT_REPO_PREFIX}/dists/sid
 	apt-ftparchive -c ${APT_SID_CONF} release . > Release
 	rm -f Release.gpg
-	gpg --batch --no-tty --output Release.gpg -ba Release
+	gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/lucid ]; then
@@ -159,7 +160,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/lucid ]; then
     cd ${APT_REPO_PREFIX}/dists/lucid
     apt-ftparchive -c ${APT_LUCID_CONF} release . > Release
     rm -f Release.gpg
-    gpg --batch --no-tty --output Release.gpg -ba Release
+    gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/precise ]; then
@@ -167,7 +168,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/precise ]; then
     cd ${APT_REPO_PREFIX}/dists/precise
     apt-ftparchive -c ${APT_PRECISE_CONF} release . > Release
     rm -f Release.gpg
-    gpg --batch --no-tty --output Release.gpg -ba Release
+    gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/trusty ]; then
@@ -175,15 +176,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/trusty ]; then
     cd ${APT_REPO_PREFIX}/dists/trusty
     apt-ftparchive -c ${APT_TRUSTY_CONF} release . > Release
     rm -f Release.gpg
-    gpg --batch --no-tty --output Release.gpg -ba Release
-fi
-
-if [ -d ${APT_REPO_PREFIX}/dists/utopic ]; then
-    echo "Processing Utopic release"
-    cd ${APT_REPO_PREFIX}/dists/utopic
-    apt-ftparchive -c ${APT_UTOPIC_CONF} release . > Release
-    rm -f Release.gpg
-    gpg --batch --no-tty --output Release.gpg -ba Release
+    gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/vivid ]; then
@@ -191,7 +184,7 @@ if [ -d ${APT_REPO_PREFIX}/dists/vivid ]; then
     cd ${APT_REPO_PREFIX}/dists/vivid
     apt-ftparchive -c ${APT_VIVID_CONF} release . > Release
     rm -f Release.gpg
-    gpg --batch --no-tty --output Release.gpg -ba Release
+    gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
 fi
 
 # Currently I didn't know how to use them properly, so I simply
