@@ -87,7 +87,6 @@ APT_WHEEZY_CONF="$HOME/.apt-ftparchive-wheezy.conf"
 APT_JESSIE_CONF="$HOME/.apt-ftparchive-jessie.conf"
 APT_STRETCH_CONF="$HOME/.apt-ftparchive-stretch.conf"
 APT_SID_CONF="$HOME/.apt-ftparchive-sid.conf"
-APT_LUCID_CONF="$HOME/.apt-ftparchive-lucid.conf"
 APT_PRECISE_CONF="$HOME/.apt-ftparchive-precise.conf"
 APT_TRUSTY_CONF="$HOME/.apt-ftparchive-trusty.conf"
 APT_VIVID_CONF="$HOME/.apt-ftparchive-vivid.conf"
@@ -153,14 +152,6 @@ if [ -d ${APT_REPO_PREFIX}/dists/sid ]; then
 	apt-ftparchive -c ${APT_SID_CONF} release . > Release
 	rm -f Release.gpg
 	gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
-fi
-
-if [ -d ${APT_REPO_PREFIX}/dists/lucid ]; then
-    echo "Processing Lucid release"
-    cd ${APT_REPO_PREFIX}/dists/lucid
-    apt-ftparchive -c ${APT_LUCID_CONF} release . > Release
-    rm -f Release.gpg
-    gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
 fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/precise ]; then
