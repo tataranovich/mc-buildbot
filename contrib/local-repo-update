@@ -82,7 +82,6 @@ if [ -r ~/bin/prepare-environment.sh ]; then
 fi
 
 APT_COMMON_CONF="$HOME/.apt-ftparchive-common.conf"
-APT_SQUEEZE_CONF="$HOME/.apt-ftparchive-squeeze.conf"
 APT_WHEEZY_CONF="$HOME/.apt-ftparchive-wheezy.conf"
 APT_JESSIE_CONF="$HOME/.apt-ftparchive-jessie.conf"
 APT_STRETCH_CONF="$HOME/.apt-ftparchive-stretch.conf"
@@ -113,14 +112,6 @@ if [ ! -x `which apt-ftparchive` ]; then
 fi
 
 apt-ftparchive generate ${APT_COMMON_CONF} 2>&1 | egrep -v 'has no (binary|source) override entry'
-
-if [ -d ${APT_REPO_PREFIX}/dists/squeeze ]; then
-	echo "Processing Squeeze release"
-	cd ${APT_REPO_PREFIX}/dists/squeeze
-	apt-ftparchive -c ${APT_SQUEEZE_CONF} release . > Release
-	rm -f Release.gpg
-	gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
-fi
 
 if [ -d ${APT_REPO_PREFIX}/dists/wheezy ]; then
 	echo "Processing Wheezy release"
