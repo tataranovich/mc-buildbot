@@ -6,7 +6,7 @@ export DEBEMAIL="tataranovich@gmail.com"
 export DEBFULLNAME="Andrey Tataranovich"
 
 MC_GIT_REMOTE="git://github.com/MidnightCommander/mc.git"
-MC_DEBIAN_VCS="http://mc-buildbot.googlecode.com/hg"
+MC_DEBIAN_VCS="https://github.com/tataranovich/mc-buildbot.git"
 MC_BUILD_PREFIX="/home/buildbot"
 MC_GIT_LOCAL=${MC_BUILD_PREFIX}/mc-git
 MC_TMP=${MC_BUILD_PREFIX}/mc-tmp
@@ -21,11 +21,11 @@ mkdir -p ${MC_BINARY}
 
 # Update local debian part
 if [ ! -d ${MC_CONTRIB} ]; then
-	hg clone ${MC_DEBIAN_VCS} ${MC_CONTRIB}
+	git clone ${MC_DEBIAN_VCS} ${MC_CONTRIB}
 else
 	cd ${MC_CONTRIB}
-	hg pull
-	hg up -C default
+	git fetch
+	git reset --hard origin/master
 fi
 
 # Update local GIT repo if build type is nightly
