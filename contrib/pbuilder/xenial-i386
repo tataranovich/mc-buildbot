@@ -1,0 +1,8 @@
+ARCHITECTURE=i386
+MIRRORSITE=http://ftp.ubuntu.com/ubuntu
+OTHERMIRROR="deb http://ftp.ubuntu.com/ubuntu xenial-security main universe multiverse restricted"
+BASETGZ=/var/cache/pbuilder/base-xenial-i386.tgz
+BUILDRESULT=/var/cache/pbuilder/result-xenial-i386/
+DISTRIBUTION=xenial
+COMPONENTS="main universe multiverse restricted"
+DEBOOTSTRAPOPTS=( '--keyring=/etc/pbuilder/ubuntu-archive-keyring.gpg' )

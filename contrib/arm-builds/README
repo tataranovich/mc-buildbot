@@ -1,0 +1,3 @@
+Script for ARM builds using QEMU.
+
+You need to install binfmt-support, qemu-user-static, qemu-system-arm, pbuilder.

@@ -1,0 +1,16 @@
+# Debian
+debian:wheezy:armel
+debian:wheezy:armhf
+debian:jessie:armel
+debian:jessie:armhf
+debian:jessie:arm64
+
+# Ubuntu
+ubuntu:precise:armel
+ubuntu:precise:armhf
+ubuntu:trusty:armhf
+ubuntu:trusty:arm64
+
+# Raspbian
+raspbian:wheezy:armhf
+raspbian:jessie:armhf

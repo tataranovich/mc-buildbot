@@ -90,6 +90,7 @@ APT_PRECISE_CONF="$HOME/.apt-ftparchive-precise.conf"
 APT_TRUSTY_CONF="$HOME/.apt-ftparchive-trusty.conf"
 APT_VIVID_CONF="$HOME/.apt-ftparchive-vivid.conf"
 APT_WILY_CONF="$HOME/.apt-ftparchive-wily.conf"
+APT_XENIAL_CONF="$HOME/.apt-ftparchive-xenial.conf"
 APT_REPO_PREFIX="$HOME/my-local-repo"
 
 if [ "$__UPLOAD_ONLY" == "yes" ]; then
@@ -174,6 +175,14 @@ if [ -d ${APT_REPO_PREFIX}/dists/wily ]; then
     echo "Processing Wily release"
     cd ${APT_REPO_PREFIX}/dists/wily
     apt-ftparchive -c ${APT_WILY_CONF} release . > Release
+    rm -f Release.gpg
+    gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
+fi
+
+if [ -d ${APT_REPO_PREFIX}/dists/xenial ]; then
+    echo "Processing Xenial release"
+    cd ${APT_REPO_PREFIX}/dists/xenial
+    apt-ftparchive -c ${APT_XENIAL_CONF} release . > Release
     rm -f Release.gpg
     gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
 fi
