@@ -8,7 +8,9 @@ set -e
 export LC_ALL=C
 export LANG=C
 
-GPG_KEY=76FB442E
+GPG_OPTS="-u 76FB442E --digest-algo SHA512 --batch --no-tty"
+APT_REPO_PREFIX="$HOME/my-local-repo"
+SUPPORTED_DISTS="wheezy jessie stretch sid precise trusty wily xenial"
 
 __warn() {
 	if [ ! -z "$1" ]; then
@@ -71,7 +73,25 @@ uploadRepository() {
 		rsync -aPz --delete --delete-after --exclude='*.db' --delete-excluded ${APT_REPO_PREFIX}/ repository:/var/vhosts/tataranovich.com/debian/
 	else
 		rsync -az --partial --delete-after ${APT_REPO_PREFIX}/pool repository:/var/vhosts/tataranovich.com/debian/ && \
-                rsync -az --delete --delete-after --exclude='*.db' --delete-excluded ${APT_REPO_PREFIX}/ repository:/var/vhosts/tataranovich.com/debian/
+    rsync -az --delete --delete-after --exclude='*.db' --delete-excluded ${APT_REPO_PREFIX}/ repository:/var/vhosts/tataranovich.com/debian/
+	fi
+}
+
+sign_release_file() {
+	local DISTNAME
+
+	if [ -z "$1" ]; then
+		return
+	fi
+
+	DISTNAME="$1"
+
+	if [ -d ${APT_REPO_PREFIX}/dists/${DISTNAME} ]; then
+		echo "Processing ${DISTNAME} release"
+		cd ${APT_REPO_PREFIX}/dists/${DISTNAME}
+		apt-ftparchive -c ${HOME}/.apt-ftparchive-${DISTNAME}.conf release . > Release
+		rm -f Release.gpg
+		gpg $GPG_OPTS --output Release.gpg -ba Release
 	fi
 }
 
@@ -80,18 +100,6 @@ parseCmdline $@
 if [ -r ~/bin/prepare-environment.sh ]; then
 	. ~/bin/prepare-environment.sh
 fi
-
-APT_COMMON_CONF="$HOME/.apt-ftparchive-common.conf"
-APT_WHEEZY_CONF="$HOME/.apt-ftparchive-wheezy.conf"
-APT_JESSIE_CONF="$HOME/.apt-ftparchive-jessie.conf"
-APT_STRETCH_CONF="$HOME/.apt-ftparchive-stretch.conf"
-APT_SID_CONF="$HOME/.apt-ftparchive-sid.conf"
-APT_PRECISE_CONF="$HOME/.apt-ftparchive-precise.conf"
-APT_TRUSTY_CONF="$HOME/.apt-ftparchive-trusty.conf"
-APT_VIVID_CONF="$HOME/.apt-ftparchive-vivid.conf"
-APT_WILY_CONF="$HOME/.apt-ftparchive-wily.conf"
-APT_XENIAL_CONF="$HOME/.apt-ftparchive-xenial.conf"
-APT_REPO_PREFIX="$HOME/my-local-repo"
 
 if [ "$__UPLOAD_ONLY" == "yes" ]; then
 	__debug "Only syncing local and remote repository"
@@ -113,79 +121,12 @@ if [ ! -x `which apt-ftparchive` ]; then
 	exit 1
 fi
 
-apt-ftparchive generate ${APT_COMMON_CONF} 2>&1 | egrep -v 'has no (binary|source) override entry'
+apt-ftparchive generate "$HOME/.apt-ftparchive-common.conf" 2>&1 | egrep -v 'has no (binary|source) override entry'
 
-if [ -d ${APT_REPO_PREFIX}/dists/wheezy ]; then
-	echo "Processing Wheezy release"
-	cd ${APT_REPO_PREFIX}/dists/wheezy
-	apt-ftparchive -c ${APT_WHEEZY_CONF} release . > Release
-	rm -f Release.gpg
-	gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
-fi
-
-if [ -d ${APT_REPO_PREFIX}/dists/jessie ]; then
-        echo "Processing Jessie release"
-        cd ${APT_REPO_PREFIX}/dists/jessie
-        apt-ftparchive -c ${APT_JESSIE_CONF} release . > Release
-        rm -f Release.gpg
-        gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
-fi
-
-if [ -d ${APT_REPO_PREFIX}/dists/stretch ]; then
-        echo "Processing Stretch release"
-        cd ${APT_REPO_PREFIX}/dists/stretch
-        apt-ftparchive -c ${APT_STRETCH_CONF} release . > Release
-        rm -f Release.gpg
-        gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
-fi
-
-if [ -d ${APT_REPO_PREFIX}/dists/sid ]; then
-	echo "Processing Sid release"
-	cd ${APT_REPO_PREFIX}/dists/sid
-	apt-ftparchive -c ${APT_SID_CONF} release . > Release
-	rm -f Release.gpg
-	gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
-fi
-
-if [ -d ${APT_REPO_PREFIX}/dists/precise ]; then
-    echo "Processing Precise release"
-    cd ${APT_REPO_PREFIX}/dists/precise
-    apt-ftparchive -c ${APT_PRECISE_CONF} release . > Release
-    rm -f Release.gpg
-    gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
-fi
-
-if [ -d ${APT_REPO_PREFIX}/dists/trusty ]; then
-    echo "Processing Trusty release"
-    cd ${APT_REPO_PREFIX}/dists/trusty
-    apt-ftparchive -c ${APT_TRUSTY_CONF} release . > Release
-    rm -f Release.gpg
-    gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
-fi
-
-if [ -d ${APT_REPO_PREFIX}/dists/vivid ]; then
-    echo "Processing Vivid release"
-    cd ${APT_REPO_PREFIX}/dists/vivid
-    apt-ftparchive -c ${APT_VIVID_CONF} release . > Release
-    rm -f Release.gpg
-    gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
-fi
-
-if [ -d ${APT_REPO_PREFIX}/dists/wily ]; then
-    echo "Processing Wily release"
-    cd ${APT_REPO_PREFIX}/dists/wily
-    apt-ftparchive -c ${APT_WILY_CONF} release . > Release
-    rm -f Release.gpg
-    gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
-fi
-
-if [ -d ${APT_REPO_PREFIX}/dists/xenial ]; then
-    echo "Processing Xenial release"
-    cd ${APT_REPO_PREFIX}/dists/xenial
-    apt-ftparchive -c ${APT_XENIAL_CONF} release . > Release
-    rm -f Release.gpg
-    gpg -u $GPG_KEY --batch --no-tty --output Release.gpg -ba Release
-fi
+for DIST in $SUPPORTED_DISTS
+do
+	sign_release_file $DIST
+done
 
 # Currently I didn't know how to use them properly, so I simply
 # delete all of them before repo rescan.
