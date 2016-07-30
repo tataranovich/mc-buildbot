@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SUPPORTED_TARGETS="wheezy-i386 wheezy-amd64 jessie-i386 jessie-amd64 stretch-i386 stretch-amd64 sid-i386 sid-amd64 precise-i386 precise-amd64 trusty-i386 trusty-amd64 vivid-i386 vivid-amd64 wily-i386 wily-amd64 xenial-i386 xenial-amd64"
+SUPPORTED_TARGETS="wheezy-i386 wheezy-amd64 jessie-i386 jessie-amd64 stretch-i386 stretch-amd64 sid-i386 sid-amd64 precise-i386 precise-amd64 trusty-i386 trusty-amd64 wily-i386 wily-amd64 xenial-i386 xenial-amd64"
 
 UNCLEAN_BUILD=0
 

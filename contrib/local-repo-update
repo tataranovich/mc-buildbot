@@ -73,7 +73,7 @@ uploadRepository() {
 		rsync -aPz --delete --delete-after --exclude='*.db' --delete-excluded ${APT_REPO_PREFIX}/ repository:/var/vhosts/tataranovich.com/debian/
 	else
 		rsync -az --partial --delete-after ${APT_REPO_PREFIX}/pool repository:/var/vhosts/tataranovich.com/debian/ && \
-    rsync -az --delete --delete-after --exclude='*.db' --delete-excluded ${APT_REPO_PREFIX}/ repository:/var/vhosts/tataranovich.com/debian/
+		rsync -az --delete --delete-after --exclude='*.db' --delete-excluded ${APT_REPO_PREFIX}/ repository:/var/vhosts/tataranovich.com/debian/
 	fi
 }
 
@@ -111,10 +111,6 @@ if [ -x ~/bin/cleanup-nightly-builds.sh ]; then
 	~/bin/cleanup-nightly-builds.sh
 fi
 
-# Currently I didn't know how to use them properly, so I simply
-# delete all of them before repo rescan.
-rm -f ${APT_REPO_PREFIX}/*.db
-
 # Check if apt-ftparchive available
 if [ ! -x `which apt-ftparchive` ]; then
 	echo "Seems that apt-ftparchive binary not installed"
@@ -127,9 +123,5 @@ for DIST in $SUPPORTED_DISTS
 do
 	sign_release_file $DIST
 done
-
-# Currently I didn't know how to use them properly, so I simply
-# delete all of them before repo rescan.
-rm -f ${APT_REPO_PREFIX}/*.db
 
 uploadRepository
