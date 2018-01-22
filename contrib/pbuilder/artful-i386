@@ -1,0 +1,8 @@
+ARCHITECTURE=i386
+MIRRORSITE=http://ftp.ubuntu.com/ubuntu
+OTHERMIRROR="deb http://ftp.ubuntu.com/ubuntu artful-security main universe multiverse restricted"
+BASETGZ=/var/cache/pbuilder/base-artful-i386.tgz
+BUILDRESULT=/var/cache/pbuilder/result-artful-i386/
+DISTRIBUTION=artful
+COMPONENTS="main universe multiverse restricted"
+DEBOOTSTRAPOPTS=( '--keyring=/etc/pbuilder/ubuntu-archive-keyring.gpg' )

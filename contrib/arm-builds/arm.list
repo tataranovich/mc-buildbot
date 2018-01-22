@@ -4,13 +4,20 @@ debian:wheezy:armhf
 debian:jessie:armel
 debian:jessie:armhf
 debian:jessie:arm64
+debian:stretch:armel
+debian:stretch:armhf
+debian:stretch:arm64
+debian:buster:armel
+debian:buster:armhf
+debian:buster:arm64
+debian:sid:armel
+debian:sid:armhf
+debian:sid:arm64
 
 # Ubuntu
-ubuntu:precise:armel
-ubuntu:precise:armhf
 ubuntu:trusty:armhf
 ubuntu:trusty:arm64
-
-# Raspbian
-raspbian:wheezy:armhf
-raspbian:jessie:armhf
+ubuntu:xenial:armhf
+ubuntu:xenial:arm64
+ubuntu:artful:armhf
+ubuntu:artful:arm64
