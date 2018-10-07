@@ -1,7 +1,0 @@
-ARCHITECTURE=amd64
-MIRRORSITE=http://ftp.debian.org/debian
-OTHERMIRROR="deb http://security.debian.org/ wheezy/updates main contrib non-free"
-BASETGZ=/var/cache/pbuilder/base-wheezy-amd64.tgz
-BUILDRESULT=/var/cache/pbuilder/result-wheezy-amd64/
-DISTRIBUTION=wheezy
-COMPONENTS="main contrib non-free"

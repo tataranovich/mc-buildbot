@@ -1,7 +1,0 @@
-ARCHITECTURE=i386
-MIRRORSITE=http://ftp.debian.org/debian
-OTHERMIRROR="deb http://security.debian.org/ wheezy/updates main contrib non-free"
-BASETGZ=/var/cache/pbuilder/base-wheezy-i386.tgz
-BUILDRESULT=/var/cache/pbuilder/result-wheezy-i386/
-DISTRIBUTION=wheezy
-COMPONENTS="main contrib non-free"
