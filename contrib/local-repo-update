@@ -10,7 +10,7 @@ export LANG=C
 
 GPG_OPTS="-u 76FB442E --digest-algo SHA512 --batch --no-tty"
 APT_REPO_PREFIX="$HOME/my-local-repo"
-SUPPORTED_DISTS="jessie stretch buster sid trusty xenial bionic"
+SUPPORTED_DISTS="jessie stretch buster sid trusty xenial bionic cosmic"
 
 __warn() {
 	if [ ! -z "$1" ]; then
