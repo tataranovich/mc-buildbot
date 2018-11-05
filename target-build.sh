@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SUPPORTED_TARGETS="jessie-i386 jessie-amd64 stretch-i386 stretch-amd64 buster-i386 buster-amd64 sid-i386 sid-amd64 trusty-i386 trusty-amd64 xenial-i386 xenial-amd64 bionic-i386 bionic-amd64"
+SUPPORTED_TARGETS="jessie-i386 jessie-amd64 stretch-i386 stretch-amd64 buster-i386 buster-amd64 sid-i386 sid-amd64 trusty-i386 trusty-amd64 xenial-i386 xenial-amd64 bionic-i386 bionic-amd64 cosmic-i386 cosmic-amd64"
 
 UNCLEAN_BUILD=0
 

@@ -1,6 +1,4 @@
 # Debian
-debian:wheezy:armel
-debian:wheezy:armhf
 debian:jessie:armel
 debian:jessie:armhf
 debian:jessie:arm64
@@ -19,5 +17,7 @@ ubuntu:trusty:armhf
 ubuntu:trusty:arm64
 ubuntu:xenial:armhf
 ubuntu:xenial:arm64
-ubuntu:artful:armhf
-ubuntu:artful:arm64
+ubuntu:bionic:armhf
+ubuntu:bionic:arm64
+ubuntu:cosmic:armhf
+ubuntu:cosmic:arm64
