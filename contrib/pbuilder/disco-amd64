@@ -1,8 +1,0 @@
-ARCHITECTURE=amd64
-MIRRORSITE=http://ftp.ubuntu.com/ubuntu
-OTHERMIRROR="deb http://ftp.ubuntu.com/ubuntu disco-security main universe multiverse restricted"
-BASETGZ=/var/cache/pbuilder/base-disco-amd64.tgz
-BUILDRESULT=/var/cache/pbuilder/result-disco-amd64/
-DISTRIBUTION=disco
-COMPONENTS="main universe multiverse restricted"
-DEBOOTSTRAPOPTS=( '--keyring=/etc/pbuilder/ubuntu-archive-keyring.gpg' )

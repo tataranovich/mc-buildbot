@@ -19,7 +19,5 @@ ubuntu:xenial:armhf
 ubuntu:xenial:arm64
 ubuntu:bionic:armhf
 ubuntu:bionic:arm64
-ubuntu:cosmic:armhf
-ubuntu:cosmic:arm64
-ubuntu:disco:armhf
-ubuntu:disco:arm64
+ubuntu:eoan:armhf
+ubuntu:eoan:arm64
