@@ -1,8 +1,0 @@
-ARCHITECTURE=amd64
-MIRRORSITE=http://ftp.ubuntu.com/ubuntu
-OTHERMIRROR="deb http://ftp.ubuntu.com/ubuntu eoan-security main universe multiverse restricted"
-BASETGZ=/var/cache/pbuilder/base-eoan-amd64.tgz
-BUILDRESULT=/var/cache/pbuilder/result-eoan-amd64/
-DISTRIBUTION=eoan
-COMPONENTS="main universe multiverse restricted"
-DEBOOTSTRAPOPTS=( '--keyring=/etc/pbuilder/ubuntu-archive-keyring.gpg' )
