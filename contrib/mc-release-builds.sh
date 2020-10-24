@@ -30,8 +30,8 @@ MC_SOURCE=`find /home/buildbot/tmp/uscan -type f -name 'mc*tar.*'`
 sudo -u buildbot /home/buildbot/buildbot.sh --release "$MC_SOURCE" >$HOME/tmp/release-builds.log 2>&1
 
 if [ $? != 0 ]; then
-	[ -f $HOME/tmp/release-builds.log ] && grep ^BUILDBOT $HOME/tmp/release-builds.log
-	echo "Error while building project, skipping repo update"
+	[ -f $HOME/tmp/release-builds.log ] && grep ^BUILDBOT $HOME/tmp/release-builds.log >&2
+	echo "Error while building project, skipping repo update" >&2
 	rm -f /home/buildbot/tmp/uscan/mc*tar.*
 	exit 1
 fi
@@ -46,7 +46,7 @@ fi
 $HOME/bin/local-repo-update >$HOME/tmp/release-repo-update.log 2>&1
 
 if [ $? != 0 ]; then
-	[ -f $HOME/tmp/release-repo-update.log ] && cat $HOME/tmp/release-repo-update.log
+	[ -f $HOME/tmp/release-repo-update.log ] && cat $HOME/tmp/release-repo-update.log >&2
 	exit 1
 fi
 
