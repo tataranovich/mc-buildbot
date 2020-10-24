@@ -4,15 +4,15 @@ DSC_FILE="$1"
 TARGET="$2"
 
 build_target() {
-    local _OS _DIST _ARCH
-    _OS="$1"
-    _DIST="$2"
-    _ARCH="$3"
-    echo -n "${_OS}-${_DIST}-${_ARCH}: "
-    if [ ! -f "/var/cache/pbuilder/${_OS}-${_DIST}-${_ARCH}-base.tgz" ]; then
-        sudo OS=$_OS DIST=$_DIST ARCH=$_ARCH pbuilder --create --configfile /etc/pbuilder/debbuilder >"logs/${_OS}-${_DIST}-${_ARCH}.create.log" 2>&1
+    local os dist arch
+    os="$1"
+    dist="$2"
+    arch="$3"
+    echo -n "$OS-$DIST-$ARCH: "
+    if [ ! -f "/var/cache/pbuilder/${os}-${dist}-${arch}-base.tgz" ]; then
+        sudo OS=$OS DIST=$DIST ARCH=$ARCH pbuilder --create --configfile /etc/pbuilder/debbuilder >"create-${OS}-${DIST}-${ARCH}.log" 2>&1
     fi
-    sudo OS=$_OS DIST=$_DIST ARCH=$_ARCH pbuilder --build --configfile /etc/pbuilder/debbuilder "$DSC_FILE" >"logs/${_OS}-${_DIST}-${_ARCH}.build.log" 2>&1
+    sudo OS=$OS DIST=$DIST ARCH=$ARCH pbuilder --build --configfile /etc/pbuilder/debbuilder "$DSC_FILE" >"build-${OS}-${DIST}-${ARCH}.log" 2>&1
     if [ $? != 0 ]; then
         echo FAIL
     else

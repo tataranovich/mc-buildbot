@@ -45,6 +45,7 @@ APTCACHE="/var/cache/pbuilder/$NAME/aptcache/"
 BUILDPLACE="/var/cache/pbuilder/build"
 HOOKDIR="/var/cache/pbuilder/hook.d/"
 DEBBUILDOPTS="-j1"
+APTCACHEHARDLINK=no
 
 if echo $DIST | egrep -q '^(jessie|trusty|xenial)$'; then
     PBUILDERSATISFYDEPENDSCMD=/usr/lib/pbuilder/pbuilder-satisfydepends-classic
@@ -54,4 +55,5 @@ fi
 
 if [ "$NAME" = "debian-jessie-arm64" ]; then
     MIRRORSITE="http://snapshot.debian.org/archive/debian/20180623T114423Z/"
+    ALLOWUNTRUSTED=yes
 fi
