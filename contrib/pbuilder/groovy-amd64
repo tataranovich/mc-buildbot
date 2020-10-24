@@ -5,4 +5,4 @@ BASETGZ=/var/cache/pbuilder/base-groovy-amd64.tgz
 BUILDRESULT=/var/cache/pbuilder/result-groovy-amd64/
 DISTRIBUTION=groovy
 COMPONENTS="main universe multiverse restricted"
-DEBOOTSTRAPOPTS=( '--keyring=/etc/pbuilder/ubuntu-archive-keyring.gpg' )
+DEBOOTSTRAPOPTS=( '--keyring=/usr/share/keyrings/ubuntu-archive-keyring.gpg' )

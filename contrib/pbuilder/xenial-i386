@@ -5,4 +5,4 @@ BASETGZ=/var/cache/pbuilder/base-xenial-i386.tgz
 BUILDRESULT=/var/cache/pbuilder/result-xenial-i386/
 DISTRIBUTION=xenial
 COMPONENTS="main universe multiverse restricted"
-DEBOOTSTRAPOPTS=( '--keyring=/etc/pbuilder/ubuntu-archive-keyring.gpg' )
+DEBOOTSTRAPOPTS=( '--keyring=/usr/share/keyrings/ubuntu-archive-keyring.gpg' )
