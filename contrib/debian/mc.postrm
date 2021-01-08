@@ -3,13 +3,17 @@ set -e
 
 case "$1" in
 	purge)
-		rm -f /etc/mc/* 2>/dev/null || true
-		rmdir /etc/mc/* 2>/dev/null || true
+
+		rm -f \
+			/etc/mc/cedit.menu \
+			/etc/mc/*.ini \
+			/etc/mc/mc.* \
+			/etc/mc/*.rc \
+			/etc/mc/Syntax
+
 		rmdir /etc/mc 2>/dev/null || true
 
 	;;
 esac
 
 #DEBHELPER#
-
-exit 0

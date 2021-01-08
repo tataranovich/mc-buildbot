@@ -1,0 +1,9 @@
+usr/share/man/man1/mc.1		/usr/share/man/man1/mcdiff.1
+
+# link docs to /usr/share/doc/mc for convenience
+usr/share/doc/mc-data/AUTHORS	/usr/share/doc/mc/AUTHORS
+usr/share/doc/mc-data/ABOUT-NLS	/usr/share/doc/mc/ABOUT-NLS
+usr/share/doc/mc-data/FAQ	/usr/share/doc/mc/FAQ
+usr/share/doc/mc-data/HACKING	/usr/share/doc/mc/HACKING
+usr/share/doc/mc-data/README	/usr/share/doc/mc/README
+usr/share/doc/mc-data/TODO	/usr/share/doc/mc/TODO

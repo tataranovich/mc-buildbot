@@ -1,0 +1,32 @@
+Last-Update: 2012-03-12
+Author: Dmitry Smirnov <onlyjob@member.fsf.org>
+From: Oliver Lange <modarin@bloody.in-berlin.de>
+Bug-MC: https://www.midnight-commander.org/ticket/2737
+Forwarded: not-needed
+Description: add 8 beautiful 256 color skins "modarin-1.2"
+ With most of the common desktop terminals, enabling 256-color mode is easily
+ done just by setting $TERM to "xterm-256color". Ubuntu users: make sure that
+ the ncurses-term package is installed.
+ .
+ Hint: if you decide to use a 256-color skin as default skin in your mc ini,
+ note that if mc is started in a 16-color terminal, mc will pop up a warning
+ saying that 256 color skins can't be used and that mc will switch to the
+ "default" skin. To get a skin of your choice loaded instead of mc's default
+ skin, you might consider the following solution:
+ .
+ Create an alias for mc in your ~/.bashrc, like:
+    if [ $TERM = "linux" ]; then
+        if [ $USER = "root" ]; then
+            myMCFallbackSkin="modarcon16root-defbg"
+        else
+            myMCFallbackSkin="modarcon16-defbg"
+        fi
+        alias mc="mc --skin $myMCFallbackSkin"
+        alias mcedit="mcedit --skin $myMCFallbackSkin"
+        alias mcview="mcview --skin $myMCFallbackSkin"
+        alias mcdiff="mcdiff --skin $myMCFallbackSkin"
+    fi
+ Linux users: to use 256-color skins in the linux console, run fbterm,
+ set $TERM to "fbterm" and then run mc within fbterm.
+ You need to specify a gfx mode in your bootloader for the kernel to use a
+ framebuffer console instead of the default text mode.

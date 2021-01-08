@@ -1,6 +1,17 @@
 mc for Debian
 -------------
 
+    New 256-color skins require 256 color mode support in terminal which
+    can be enabled by setting "TERM=xterm-256color"
+
+    New skins may have problems with rendering double-line frames
+    in some terminal applications, presumably due to font settings.
+    In such case you may use '-thin' variant of skin with single-line
+    frame or reconfigure terminal settings.
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Thu, 16 Mar 2012 13:32:44 +1100
+
+
  -  In order to get rid of the commandline history to be full with cd commands
     from the both boxes set this environment variable:
 

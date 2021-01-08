@@ -1,0 +1,5 @@
+# backward compatibility for mc-4.7.*
+usr/lib/mc/mc-wrapper.sh	/usr/share/mc/bin/mc-wrapper.sh
+usr/lib/mc/mc-wrapper.csh	/usr/share/mc/bin/mc-wrapper.csh
+usr/lib/mc/mc.sh		/usr/share/mc/bin/mc.sh
+usr/lib/mc/mc.csh		/usr/share/mc/bin/mc.csh

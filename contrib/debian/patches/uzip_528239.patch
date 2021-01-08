@@ -1,0 +1,25 @@
+Last-Update: 2012-02-28
+Reviewed-by: Dmitry Smirnov <onlyjob@member.fsf.org>
+Forwarded: not-needed
+Bug-Debian: http://bugs.debian.org/528239
+Bug-Debian: http://bugs.debian.org/661467
+Author: Johannes Stezenbach <js@sig21.net>
+Author: Yury V. Zaytsev <yury@shurup.com>
+Description: Fix "fail to display zip file contents" after unzip update
+ This patch is quite important. mc set HAVE_ZIPINFO at build time
+ if 'unzip' package is available. If not, HAVE_ZIPINFO would be mistakenly
+ set to zero which will break run-time zip browsing.
+ This patch is to make sure the right value is used.
+ If this patch do not apply make sure 'unzip' is present in Build-Deps.
+
+--- a/src/vfs/extfs/helpers/uzip.in
++++ b/src/vfs/extfs/helpers/uzip.in
+@@ -19,7 +19,7 @@ my $app_zip = "@ZIP@";
+ # Location of the unzip program
+ my $app_unzip = "@UNZIP@";
+ # Set this to 1 if zipinfo (unzip -Z) is to be used (recommended), otherwise 0.
+-my $op_has_zipinfo = @HAVE_ZIPINFO@;
++my $op_has_zipinfo = 1;
+ 
+ # Command used to list archives (zipinfo mode)
+ my $cmd_list_zi = "$app_unzip -Z -l -T";

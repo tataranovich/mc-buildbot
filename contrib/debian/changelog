@@ -1,21 +1,594 @@
+mc (3:4.8.25-1) unstable; urgency=low
+
+  * New upstream release.
+  * Recommends += "sensible-utils".
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Fri, 02 Oct 2020 18:04:08 +1000
+
+mc (3:4.8.24-2) unstable; urgency=medium
+
+  * New upstream patch to fix browsing of .DEB packages (Closes: #949700).
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sun, 26 Jan 2020 08:23:52 +1100
+
+mc (3:4.8.24-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Standards-Version: 4.5.0.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Wed, 22 Jan 2020 11:43:23 +1100
+
+mc (3:4.8.23-1) unstable; urgency=medium
+
+  * New upstream release.
+    + fixed "Failed gpm connect attempt ... for vc /dev/tty0"
+      (Closes: #743566).
+  * Standards-Version: 4.4.0.
+  * DH & compat to version 12.
+  * Removed source compression options.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Fri, 23 Aug 2019 12:10:00 +1000
+
+mc (3:4.8.22-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Suggests += "epub-utils".
+  * Standards-Version: 4.3.0.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sat, 19 Jan 2019 00:10:34 +1100
+
+mc (3:4.8.21-1) unstable; urgency=medium
+
+  * New upstream release [June 2018].
+    + added .tar.zst / .tzst support (Closes: #893389).
+  * Set myself as Maintainer (Closes: #899775).
+  * Updated Vcs URLs to Salsa.
+  * Removed needless dependency versioning.
+  * Standards-Version: 4.1.4.
+  * rules: removed "--parallel" which is implied on DH/compat v11.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Wed, 06 Jun 2018 14:34:10 +1000
+
+mc (3:4.8.20-1) unstable; urgency=medium
+
+  * New upstream release.
+    + fixed random crash at startup (Closes: #870728).
+  * rules: removed call to dpkg-parsechangelog.
+  * Debhelper & compat to version 11.
+  * Standards-Version: 4.1.3.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sun, 04 Mar 2018 16:40:01 +1100
+
+mc (3:4.8.19-1) unstable; urgency=low
+
+  * new upstream release
+    + Closes: #866019 (crash On SFTP Upload).
+    + Closes: #808303 (filtered view does not work).
+    + Closes: #825974 (subshell no longer sees correct terminal size).
+
+  * remove merged patches:
+    + uzip_528239.patch
+
+  * update patches: (use gboolean instead of int)
+    + disable_internal_editor.patch
+    + mcedit_full_path.patch
+    + mcedit_auto_indent.patch
+    + mcedit_group_undo.patch
+
+  * Remove Patrick Winnertz <winnie@debian.org> from
+    the Uploaders List (MIA). Thank you Patrick for
+    all your work on mc package.
+    It was a pleasure to work with you.
+    (Closes: #867758).
+
+  * Fix some spelling errors in manpage.
+  * Bump standard version to 4.0.0
+  * Use secure URI for upstream web site.
+  * fix error message when you gzip or bzip files from user menu.
+    Thanks to Yuriy M. Kaminskiy (Closes:  #863984).
+
+ -- Denis Briand <debian@denis-briand.fr>  Fri, 04 Aug 2017 23:03:29 +0200
+
+mc (3:4.8.18-1) unstable; urgency=low
+
+  [ Denis Briand ]
+  * Update repository in debian/watch (thanks Yury).
+
+  [ Dmitry Smirnov ]
+  * New upstream release [October 2016].
+  * Vcs-Git URL to HTTPS.
+  * Suggests += "libaspell-dev"
+    mcedit needs libaspell for spellchecking functionality.
+    -dev package is required because mcedit is looking for "libaspell.so".
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Mon, 17 Oct 2016 09:59:29 +1100
+
+mc (3:4.8.17-1) unstable; urgency=low
+
+  * New upstream release [May 2016] (Closes: #746990).
+
+  [ Denis Briand <debian@denis-briand.fr> ]
+  * Fixed spelling error in manpage s/interpeted/interpreted/
+  * Removed obsolete patches:
+    - 3379.patch
+    - update-po.patch
+
+  [ Dmitry Smirnov <onlyjob@debian.org> ]
+  * Updated copyright file.
+  * Standards-Version: 3.9.8.
+  * Modernised Vcs-Browser URL.
+  * dbgsym-migration: dropped "mc-dbg" package.
+  * Remove obsolete conffile "/etc/mc/mc.menu.sr".
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Mon, 09 May 2016 07:41:26 +1000
+
+mc (3:4.8.15-2) unstable; urgency=low
+
+  * Upload to unstable.
+
+  [ Dmitry Smirnov <onlyjob@debian.org> ]
+  * Updated "mcedit_full_path.patch" to modify corresponding man page.
+  * Fix build with "debuild -A" (Closes: #806076).
+
+  [ Denis Briand <debian@denis-briand.fr> ]
+  * Remove debian/mc.menu file (see #741573).
+
+ -- Denis Briand <debian@denis-briand.fr>  Sat, 19 Dec 2015 23:15:45 +0100
+
+mc (3:4.8.15-1) experimental; urgency=low
+
+  * New upstream version [November 2015].
+    + fixed "segfault for SFTP VFS" (Closes: #774135).
+  * Handle conffile removal from maintscript.
+  * New "mcedit_full_path.patch" to show full path to the file in 'mcedit'.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Thu, 12 Nov 2015 17:12:11 +1100
+
+mc (3:4.8.14-1) experimental; urgency=low
+
+  * New upstream version [March 2015]:
+    + fix mcedit: status line doesn't show full path to file (Closes: #764226).
+    + fix file selection by patterns uses bytes instead of unicode characters
+      (Closes: #663136).
+
+  [ Denis Briand <debian@denis-briand.fr> ]
+  * Add lintian override on debian-watch-may-check-gpg-signature
+      Upstream doesn't provide gpg signature.
+  * Add Keywords entry into debian/mc.desktop file.
+  * Add mcedit.desktop file.
+  * Denis Briand goes back into the package devel team.
+      Add into 'uploaders' field.
+  * Add mcedit into Debian menu.
+  * Add mcedit icon.
+  * Remove merged upstream patches:
+    + 2966.patch
+    + 3297.patch
+    + pot.patch
+
+  [ Dmitry Smirnov <onlyjob@debian.org> ]
+  * Minor copyright updates; refreshed "2987" and "alt_editor" patches.
+  * rules: dropped obsolete "override_dh_builddeb".
+  * rules: policy §4.9 compliant "get-orig-source".
+
+ -- Denis Briand <debian@denis-briand.fr>  Tue, 24 Mar 2015 12:43:27 +0100
+
+mc (3:4.8.13-3) unstable; urgency=medium
+
+  * New upstream patch to fix loss of destination file when pre-allocation
+    fail (Closes: #767463).
+  * New patch to prevent accidental execution of shell command
+    (Closes: #703741).
+    Thanks, Dmitry Borisyuk.
+  * New patch to use dummy password to prevent hangs on extraction from
+    encrypted ZIP archives (Closes: #772080).
+    Thanks, Dmitry Borisyuk.
+  * New patch to fix bashism in "gitfs+" helper (Closes: #772306).
+    Thanks, Raphael Geissert.
+  * Update translations during build (Closes: #772879).
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sat, 13 Dec 2014 21:35:45 +1100
+
+mc (3:4.8.13-2) unstable; urgency=medium
+
+  * New "2966.patch" to fix viewing broken man pages (Closes: #700569).
+  * Standards-Version: 3.9.6.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Mon, 29 Sep 2014 17:09:08 +1000
+
+mc (3:4.8.13-1) unstable; urgency=low
+
+  * New upstream release [September 2014].
+  * Added "debian/gbp.conf".
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Tue, 09 Sep 2014 16:48:34 +1000
+
+mc (3:4.8.12-1) unstable; urgency=low
+
+  * New upstream release [April 2014].
+    + fixed Alt-P "format parahraph" (Closes: #725692).
+    + fixed tilde ("~") expansion (Closes: #733621).
+  * Refreshed thin "modarin" skins.
+  * Standards to 3.9.5.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Wed, 02 Apr 2014 13:07:19 +1100
+
+mc (3:4.8.11-1) unstable; urgency=low
+
+  * New upstream release [November 2013].
+    + fixed behaviour with "num_history_items_recorded=0" (Closes: #723868).
+    + no longer use deprecated "find -perm +xxx" (Closes: #724766).
+  * Removed all backported and forwarded patches.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Thu, 05 Dec 2013 05:41:14 +1100
+
+mc (3:4.8.10-4) unstable; urgency=low
+
+  * New backported "3059.patch" to fix "Compute totals" progress bar and
+    segfault on copy/move operations (Closes: #722891);
+    Thanks, Graham Inggs.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Tue, 17 Sep 2013 17:28:54 +1000
+
+mc (3:4.8.10-3) unstable; urgency=low
+
+  * New backported patches:
+    + "3047.patch" to fix handling directories in command line
+      (Closes: #714369).
+    + "3053.patch" to fix FTBFS on GNU Hurd.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sat, 14 Sep 2013 15:15:07 +1000
+
+mc (3:4.8.10-2) unstable; urgency=low
+
+  * Upload to unstable.
+  * New backported "3070.patch" to fix saving changes in nested archives
+    (Closes: #721961).
+  * Consolidated some viewer override patches into "ext_run-mailcap.patch";
+    extended the latter to use `see` instead of `realplay` to open .ram
+    files.
+  * mc: "Provides: mcedit" (Closes: #720938).
+  * Enabled verbose build using "--disable-silent-rules".
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sun, 08 Sep 2013 13:18:36 +1000
+
+mc (3:4.8.10-1) experimental; urgency=low
+
+  * New upstream release [August 2013].
+  * No longer ship "debian/skins/modarin-1.2" since upstream integrated
+    original "modarin" skins to orig.tar.
+  * Patchworks:
+    - dropped "mcedit_max-size.patch" as upstream removed limitation
+      for file size.
+    - all backported patches are dropped.
+    + some remaining patches were refreshed.
+    + added new patch to fix "macro `\' not defined" in man pages.
+  * mc-data: "Multi-Arch: foreign" (Closes: #712243).
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sat, 03 Aug 2013 21:17:55 +1000
+
+mc (3:4.8.8-1) experimental; urgency=low
+
+  * New upstream release [April 2013]
+    + Fixed "Improper sanitization of MC_EXT_SELECTED variable"
+      CVE-2012-4463 (Closes: #689571).
+    + Fixed "Panelize loses files after find" (Closes: #694943).
+  * Patchworks:
+    * Dropped all backported patches.
+    * Removed patches (no longer needed due to upstream changes):
+      - man_mc
+      - ext_libreoffice
+      - ext_use_default_pdf_viewer
+      - ext_use_dvicat_instead_of_dvi2tty
+    * New patches:
+      + [ext_open_dvi] to use mailcap entry to choose dvi viewer instead
+        of hardcoded `xdvi`.
+      + [2991] to fix MC#2991 "find dialog status area not properly
+        cleared upon update".
+      + [3000] to fix MC#3000 "incorrect file size in overwrite dialog".
+      + [3001] to fix MC#3001 "garbage in subshell prompt".
+  * Renaming keymap conffiles in [postinst,postrm,preinst] according to
+    upstream changes.
+  * Added (Oregon State University) mirror to debian/watch.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Mon, 10 Jun 2013 01:38:56 +1000
+
+mc (3:4.8.5-1) unstable; urgency=low
+
+  * Upload to unstable.
+  * Standards to 3.9.4.
+  * Suggests:
+    + genisoimage (provides "/usr/bin/isoinfo") (Closes: #701190).
+    + poppler-utils (provides "/usr/bin/pdftotext").
+  * Removed obsolete "DM-Upload-Allowed: yes".
+  * Updated my email address and copyright years.
+
+ -- Dmitry Smirnov <onlyjob@debian.org>  Sun, 19 May 2013 11:02:26 +1000
+
+mc (3:4.8.5-1~exp5) experimental; urgency=low
+
+  * New backported patch to fix diff.gz inspection from symlink
+    (Closes: #689258).
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Thu, 04 Oct 2012 11:35:25 +1000
+
+mc (3:4.8.5-1~exp4) experimental; urgency=low
+
+  * New backported patch to fix ESC+TAB completion on paths
+    starting with "~" (Closes: #688075).
+  * Removing obsolete conffile "/etc/mc/edit.spell.rc" (Closes: #687459).
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Tue, 25 Sep 2012 09:55:29 +1000
+
+mc (3:4.8.5-1~exp3) experimental; urgency=low
+
+  * New ext_use_default_editor.patch to override "vi" hardcoded in mc.ext
+    with "editor" to invoke system's default editor instead of vi.
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Sat, 22 Sep 2012 13:20:25 +1000
+
+mc (3:4.8.5-1~exp2) experimental; urgency=low
+
+  * debian/clean to remove generated files in order to allow second
+    build in the same source tree.
+  * replace '$${prefix}' passed to --libexecdir with '/usr' to fix ext.d
+    handlers. Otherwise '${prefix}' get embedded to scripts which makes
+    them fail if ${prefix} variable is not set.
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Fri, 14 Sep 2012 15:27:42 +1000
+
+mc (3:4.8.5-1~exp1) experimental; urgency=low
+
+  * New upstream release [September 2012]
+    (Closes: #681773) "segfaults when /tmp/mc-root is not owned by root".
+  * build using:
+    + --enable-aspell to enable spell check in internal editor.
+    + --enable-vfs-sftp for SFTP support.
+    + --as-needed to minimise needless linking.
+  * New build dependencies:
+    + libaspell-dev
+    + libssh2-1-dev
+  * Build-Depends are sorted and alphabetised.
+  * Suggest 'texlive-binaries' (providing 'dvi2tty') as alternative
+    to 'catdvi'.
+  * new patches:
+    + 2873 to fix "'Enter' action on a rpm file with space in file name".
+    + 2881 to fix "two-columns extra offset of cursor after tab character".
+    + mcedit_group_undo.patch to use "Group undo" by default in mcedit.
+  * dropped obsolete (applied-upstream or old backported) patches.
+  * remaining patches are updated; backported patches applied first.
+  * force x-www-browser instead of upstream list of browsers.
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Thu, 13 Sep 2012 02:43:55 +1000
+
+mc (3:4.8.3-10) unstable; urgency=low
+
+  * New backported patch to fix diff.gz inspection from symlink
+    (Closes: #689258).
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Tue, 02 Oct 2012 19:09:51 +1000
+
+mc (3:4.8.3-9) unstable; urgency=low
+
+  * new backported patch to fix ESC+TAB completion on paths
+    starting with "~" (Closes: #688075).
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Mon, 24 Sep 2012 01:36:11 +1000
+
+mc (3:4.8.3-8) unstable; urgency=low
+
+  * New backported patches:
+    + to fix "cannot Copy/Move files with filename encoding change".
+    + to fix "can't create or enter directory ~".
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Mon, 10 Sep 2012 12:32:50 +1000
+
+mc (3:4.8.3-7) unstable; urgency=low
+
+  * New backported patches:
+    + to fix bug in shell link history.
+    + to fix incomplete sand256 skin.
+  * Minor update to 2862.patch as per upstream merge.
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Thu, 30 Aug 2012 18:53:22 +1000
+
+mc (3:4.8.3-6) unstable; urgency=low
+
+  * xz compression for binary packages.
+  * new backported patches:
+    + to fix "refresh problem in directory tree view" (Closes: #675692).
+    + to fix "mcedit can't save file in safe mode" (Closes: #673252).
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Sat, 25 Aug 2012 12:19:25 +1000
+
+mc (3:4.8.3-5) unstable; urgency=low
+
+  * 2800.patch is corrected to avoid crash on entering archives.
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Sun, 05 Aug 2012 21:52:36 +1000
+
+mc (3:4.8.3-4) unstable; urgency=low
+
+  * new backported patches:
+    + to fix "Garbage directory listing in ftpfs"
+      (Closes: #681515, #675921).
+    + to fix "hex search: can't find 00 (zeroes) in patterns".
+  * mc.desktop is validated with 'desktop-file-validate' and corrected.
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Sun, 05 Aug 2012 09:51:58 +1000
+
+mc (3:4.8.3-3) unstable; urgency=high
+
+  * added new backported patch to fix issue which may cause loss of data
+    on copy to full partition (Closes: #677038).
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Wed, 27 Jun 2012 04:51:30 +1000
+
+mc (3:4.8.3-2) unstable; urgency=low
+
+  * do not FTBFS on failed post-build tests.
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Sun, 06 May 2012 14:49:48 +1000
+
+mc (3:4.8.3-1) unstable; urgency=low
+
+  * New upstream release [April 2012]
+    + fixed crash on compare files with panel in quickview mode
+      (Closes: #666692)
+  * dropped cannot-copy-zero-length-files-with-Preallocate_space-option.patch
+    (applied-upstream)
+  * new backported patches:
+    + to fix FTBFS with --enable-tests
+    + to fix warning on entering archives
+    + to fix crash on relative symlink creation
+    + to fix crash on 'chown'
+  * old patches are refreshed, sorted and renamed
+  * minor debian/copyright clean-up
+  * changing debian source compression to .xz
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Sat, 05 May 2012 08:14:20 +1000
+
+mc (3:4.8.1-4) unstable; urgency=low
+
+  * patch (Closes: #664840 I:"cannot copy zero-length files with
+    [Preallocate space] option")
+  * d-rules: invoke autogen.sh if present in source tree to
+    simplify building from trunk
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Wed, 29 Mar 2012 22:51:16 +1100
+
+mc (3:4.8.1-3) unstable; urgency=low
+
+  * new beautiful 256 color skins "modarin-1.2" by Oliver Lange
+  * d-README.Debian: Document a potential issue about invisible
+    double lines in those skins and how to work around these.
+  * d-control: no longer suggest transitional 'xpdf-reader'
+  * d-rules: build with all hardening
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Fri, 16 Mar 2012 09:49:52 +0100
+
+mc (3:4.8.1-2) unstable; urgency=low
+
+  * Build-Depends are updated: 'bison' moved to build-deps;
+    architecture wildcard replaced silly "type-handling | not+linux-gnu"
+    (Closes: #587875 N:"Please remove type-handling dependency")
+  * new patch to increase maximum file size for mcedit to 128 MiB
+    (Closes: #369565 W:"mcedit: wishing a bigger file size limit")
+    Thanks to Daniele Giacomini.
+  * new patch to disable "Return does autoindent" by default in mcedit
+    (Closes: #570502 N:"mcedit: adding extra spaces when pasting a text
+     preceded by spaces")
+    (Closes: #575711 N:"pasting extra tabs, AGAIN")
+  * added mc.NEWS file with notes about important changes in this release
+    (Closes: #661435 W:"lynx-like motion is lost during upgrade to 4.8.1")
+  * added symlinks to all scripts in /usr/lib/mc for backward compatibility
+  * new patch to correct path to scripts in man page
+    (Closes: #661481 N:"Acknowledgement mc: /usr/share/mc/bin/mc.sh missing")
+  * 'unzip' added to build-deps to set proper zip mode at build-time;
+    'unzip' moved to Recommends from Suggests.
+    (Closes: #661467 N:"mc: zip file browsing broken")
+  * Recommends 'perl' and 'unzip' instead of Suggests
+  * dropped old 20_wrong_path_to_wrappers.patch, which was breaking
+    correct path to wrappers (note the precisely chosen file name ;)
+  * corrected and properly annotated 09_uzip_broken_528239.patch
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Mon, 27 Feb 2012 17:16:53 +1100
+
+mc (3:4.8.1-1) unstable; urgency=low
+
+  * New upstream release [December 2011]
+    (Closes: #618542 N:"please follow upstream progress")
+    (Closes: #528331 N:"[VFS] utar is unable to open .tar files")
+    (Closes: #626287 N:"SHIFT+F6 should open rename dialog")
+    (Closes: #609489 I:"If <F4> is pressed ~/.mc/cedit/Syntax is missing")
+    (Closes: #606331 I:"regression: panel configuration on startup;
+     view search configuration")
+    (Closes: #567119 I:"mcedit ignores editnormal in MC_COLOR_TABLE")
+    (Closes: #587372 N:"fish does not preserve modification time when
+     copying files to remote host")
+    (Closes: #592396 N:"file rename (F6) with non-usual characters failed")
+    (Closes: #525146 N:"mc hangs when copying multiple files from ftp")
+    (Closes: #574761 N:" [VFS] internal tar considers files containig
+     '@' as directories.")
+    (Closes: #584687 N:"mc/fish segfaults when remote copy/move appends
+     to existing file")
+    (Closes: #619092 W:"Wishlist: mc to open ISO files")
+    (Closes: #602857 M:"use 7zr for generic .7z archives if available")
+    (Closes: #61987 W:"total ETA wanted")
+  * debian/watch
+    • fixed and updated to fetch latest .tar.xz
+  * dropped CDBS, now using debhelper only
+  * debhelper & compat to version 9
+  * dh-autoreconf to update toolchain
+  * intltoolize to refresh Makefile.in.in
+  * debian/control
+    • standards to 3.9.3 (thanks to Andreas Tille)
+    • added to build-deps:
+      + 'type-handling' as alternative to 'libgpm-dev'
+      + 'libpam0g-dev' optional, used by build system
+      + 'check' to enable post-build unit tests
+      + 'autopoint' (used by autoreconf)
+    • 'bison' added to Build-Depends-Indep
+       if available, it is used by upstream build system
+       to regenerate some files
+    • added myself to Uploaders
+  * debian/copyright:
+    • updated and converted to DEP-5
+    • added copyrights of debian contributors
+    • audit of upstream licenses/copyrights - all information is included
+  * configure options
+    + --disable-static
+    + --enable-tests
+    - --without-samba (obsolete)
+  * patchworks:
+    • relocated to debian/patches from subdir
+    • new patches:
+      + new man_spelling.patch (lintianisation)
+      + new ext_libreoffice.patch to replace 'ooffice' command
+        with 'libreoffice' - thanks to Osamu Aoki
+        (Closes: #641926 N:"mc.ext updates (xz, libreoffice)")
+      + new ext_cpio-xz.patch to improve .xz support,
+        (thanks to Osamu Aoki)
+    • updated:
+      * 04_add_gem_extension.patch
+      * 05_disable_internal_editor.patch
+      * 08_use_sensible-editor.patch
+      * 99_detect_alt_editor.patch
+    • disabled, to drop later:
+      * 09_uzip_broken_528239.patch
+    • dropped (obsolete)
+      - 03_use_awk.patch
+      - pending/99_enable_reading_debs.patch (applied upstream)
+      - debian/patches/README
+  * updated lintian overrides
+    + added lintian-overrides for executable-not-elf-or-script
+      for files in /usr/lib/mc/fish
+  * install correct ChangeLog
+  * install scripts to /usr/lib/mc
+    (previously was installed to /usr/share/mc)
+  * added symlink to missing mcdiff.1 man page
+  * added symlink to relocated mc-wrapper.sh for backward compatibility
+  * dropped man page for mcmfmt (binary is no longer shipped by upstream)
+  * handle configuration files upgrades/removes with
+    dpkg-maintscript-helper in preinst/postinst/postrm
+  * architecture-independent files are separated to 'mc-data' package
+    + added upgrade path with Breaks/Replaces
+    + added symbolic links to link files from /usr/share/doc/mc-data/
+      to /usr/share/doc/mc/
+  * removed 'exit 0' from preinst/postinst/prerm/postrm files
+  * VCS links updated to point at new collab-maint repository
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Fri, 24 Feb 2012 13:04:57 +1100
+
 mc (3:4.7.0.9-2) unstable; urgency=low
 
-  * Backport fix to prevent crash while copying to bogus dirs
-    (Closes: #592396) <--- TODO: check the bug out, this breaks things!!!
+  * debian/desktopfiles: Added desktop file and icon from
+    https://midnight-commander.org/ticket/2314
+    Closes: #616196
+  * debian/patches/pending/99_enable_reading_debs.patch: Enable reading
+    *.deb files again
+    Closes: #626171, #628762
 
-    UP: OK, it seems that it's now properly fixed on master.
-    Let's see if they will backport it to 4.7.0.10 or we have to
-    hold it on for 4.7.5.
-
-    This text has to be removed before release of the package!
-
-  [Yury V. Zaytsev]
-  * New upstream version (bugfix release).
-    + Fixed Slovak translation hotkeys conflicts (Closes: #600851)
-    + Fixed IPV4 FTP connection scheme (LP: #562361)
-    + Fixed line jump when started as editor (LP: #632816)
-
- -- Patrick Winnertz <winnie@debian.org>  Wed, 08 Sep 2010 15:07:44 +0200
+ -- Andreas Tille <tille@debian.org>  Tue, 21 Jun 2011 13:31:08 +0200
 
 mc (3:4.7.0.9-1) unstable; urgency=low
 
@@ -1489,4 +2062,3 @@ mc (3.5.17-1) unstable; urgency=low
   * Sources converted to new format
 
  -- Fernando Alegre <alegre@debian.org>  Mon, 24 Feb 1997 12:56:43 +0100
-

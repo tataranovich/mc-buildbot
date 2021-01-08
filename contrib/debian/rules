@@ -1,31 +1,64 @@
 #!/usr/bin/make -f
 
-include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/class/autotools.mk
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
 
-DEB_DH_STRIP_ARGS := --dbg-package=mc-dbg
-DEB_CONFIGURE_LIBEXECDIR := /usr/lib
-DEB_CONFIGURE_EXTRA_FLAGS := --with-x --with-screen=slang --enable-aspell --disable-rpath --disable-static
-AWK := awk
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 
-# If DEB_BUILD_OPTIONS=parallel=n, build in n parallel processes
-ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
-	NUMJOBS = $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
-	MAKEFLAGS += -j$(NUMJOBS)
-endif
+# minimise needless linking
+export DEB_LDFLAGS_MAINT_APPEND= -Wl,--as-needed
 
-DEB_FIXPERMS_EXCLUDE := /usr/lib/mc/cons.saver
+%:
+	dh $@ --with autoreconf
 
-#makebuilddir/mc::
-#	dh_autoreconf
+# use --as-needed only if supported by dh-autoreconf (to simplify backporting)
+DH_AS_NEEDED=$(shell dpkg --compare-versions $$(dpkg --status dh-autoreconf | grep Version | cut -d' ' -f2) ge 6 && echo --as-needed)
+override_dh_autoreconf:
+	[ ! -x "./autogen.sh" ] || ./autogen.sh
+	intltoolize --automake --copy --force
+	dh_autoreconf $(DH_AS_NEEDED)
 
-binary-post-install/mc::
-	chmod 644 ./debian/mc/usr/share/mc/bin/mc*
+# --enable-werror will cause FTBFS on GNU Hurd:
+# src/vfs/fish/fish.c: In function 'fish_fh_open':
+# fish.c:1517:5: error: 'and' of mutually exclusive equal-tests is always 0 [-Werror]
+#
+# AWK="awk" is inheritance of 4.7.* series, see http://bugs.debian.org/499723
+# might be still necessary for extfs scripts
+override_dh_auto_configure:
+	dh_auto_configure -- AWK="awk" X11_WWW="x-www-browser" \
+		--libexecdir='/usr/lib' \
+		--with-x \
+		--with-screen=slang \
+		--disable-rpath \
+		--disable-static \
+		--disable-silent-rules \
+		--enable-aspell \
+		--enable-vfs-sftp \
+		--enable-vfs-undelfs \
+		--enable-tests
+#		--enable-vfs-smb=yes
 
-	chgrp tty ./debian/mc/usr/lib/mc/cons.saver || true
-	chmod g+s ./debian/mc/usr/lib/mc/cons.saver || true
+override_dh_auto_build:
+	# update translations
+	cd po && $(MAKE) update-po
+	dh_auto_build
 
-	chmod 644 ./debian/mc/usr/lib/mc/fish/*
+override_dh_auto_test:
+	## allow test(s) failure
+	-dh_auto_test
 
-#cleanbuilddir/mc::
-#	dh_autoreconf_clean
+override_dh_auto_install:
+	dh_auto_install --max-parallel=1
+
+override_dh_fixperms:
+	-chmod -c 755 debian/mc/etc/mc/*.rc
+	dh_fixperms
+	# cons.saver has to be sgid tty to access vcsa
+	chgrp tty debian/mc/usr/lib/mc/cons.saver || true
+	chmod g+s debian/mc/usr/lib/mc/cons.saver || true
+
+override_dh_installchangelogs:
+	dh_installchangelogs doc/NEWS
+
+override_dh_strip:
+	dh_strip --dbgsym-migration='mc-dbg (<< 3:4.8.17~)'

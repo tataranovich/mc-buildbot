@@ -1,0 +1,20 @@
+Last-Update: 2017-06-29
+Forwarded: no
+Bug-Debian: http://bugs.debian.org/570502
+Author: Dmitry Smirnov <onlyjob@member.fsf.org>
+Updated-by: Denis Briand <debian@denis-briand.fr>
+Description: disable "Return does autoindent" by default (mcedit)
+
+--- a/src/editor/edit.c
++++ b/src/editor/edit.c
+@@ -77,9 +77,9 @@
+ int option_word_wrap_line_length = DEFAULT_WRAP_LINE_LENGTH;
+ gboolean option_typewriter_wrap = FALSE;
+ gboolean option_auto_para_formatting = FALSE;
+ gboolean option_fill_tabs_with_spaces = FALSE;
+-gboolean option_return_does_auto_indent = TRUE;
++gboolean option_return_does_auto_indent = FALSE;
+ gboolean option_backspace_through_tabs = FALSE;
+ gboolean option_fake_half_tabs = TRUE;
+ int option_save_mode = EDIT_QUICK_SAVE;
+ gboolean option_save_position = TRUE;

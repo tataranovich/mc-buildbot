@@ -1,8 +1,0 @@
-debian/extra/icon/mc.xpm usr/share/pixmaps
-etc/mc/*
-usr/bin/mc*
-usr/lib/mc/cons.saver
-usr/lib/mc/ext.d/*
-usr/lib/mc/extfs.d/*
-usr/lib/mc/fish/*
-usr/lib/mc/mc*sh usr/share/mc/bin

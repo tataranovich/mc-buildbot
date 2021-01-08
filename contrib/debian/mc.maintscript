@@ -1,0 +1,8 @@
+rm_conffile /etc/mc/edit.spell.rc      3:4.8.5-1
+rm_conffile /etc/mc/mc.charsets        3:4.8-1
+rm_conffile /etc/mc/mc.lib             3:4.8-1
+rm_conffile /etc/mc/Syntax             3:4.8-1
+rm_conffile /etc/mc/mc.menu.sr         3:4.8.17-0
+mv_conffile /etc/mc/cedit.menu         /etc/mc/mcedit.menu         3:4.8-1
+mv_conffile /etc/mc/mc.keymap.emacs    /etc/mc/mc.emacs.keymap     3:4.8.8-0
+mv_conffile /etc/mc/mc.keymap.default  /etc/mc/mc.default.keymap   3:4.8.8-0

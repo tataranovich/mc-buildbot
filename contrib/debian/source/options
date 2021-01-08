@@ -1,0 +1,2 @@
+# ignore changes on refreshed translations
+extend-diff-ignore = "(^|/)po/[^/]+\.po$"

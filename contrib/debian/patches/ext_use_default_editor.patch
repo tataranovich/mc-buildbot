@@ -1,0 +1,18 @@
+Last-Update: 2013-04-03
+Author: Dmitry Smirnov <onlyjob@member.fsf.org>
+Forwarded: not-needed
+Description: Use default editor instead of vi
+
+--- a/misc/mc.ext.in
++++ b/misc/mc.ext.in
+@@ -824,9 +824,9 @@
+ ### Includes
+ # includes should be at end of bindings
+ 
+ include/editor
+-	Open=%var{EDITOR:vi} %f
++	Open=%var{EDITOR:editor} %f
+ 
+ include/image
+ 	Open=@EXTHELPERSDIR@/image.sh open ALL_FORMATS
+ 	View=%view{ascii} @EXTHELPERSDIR@/image.sh view ALL_FORMATS
