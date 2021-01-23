@@ -9,7 +9,7 @@ echo "Started at `date -R`"
 rm -f /home/buildbot/tmp/uscan/mc*tar.*
 
 if [ "$1" != "--force" ]; then
-	uscan --destdir /home/buildbot/tmp/uscan --download --repack --rename $HOME/debian-packages/mc || {
+	uscan --destdir /home/buildbot/tmp/uscan --download --repack --compression=gzip --rename $HOME/debian-packages/mc || {
 		echo
 		echo "No new release found"
 		echo
@@ -19,9 +19,9 @@ if [ "$1" != "--force" ]; then
 elif [ "$1" == "--force" ]; then
 	if [ ! -z "$2" ]; then
 		echo "Trying to download explicit version: $2"
-		uscan --destdir /home/buildbot/tmp/uscan --force-download --repack --download-version "$2" --rename $HOME/debian-packages/mc || exit 1
+		uscan --destdir /home/buildbot/tmp/uscan --force-download --repack --compression=gzip --download-version "$2" --rename $HOME/debian-packages/mc || exit 1
 	else
-		uscan --destdir /home/buildbot/tmp/uscan --force-download --repack --rename $HOME/debian-packages/mc || exit 1
+		uscan --destdir /home/buildbot/tmp/uscan --force-download --repack --compression=gzip --rename $HOME/debian-packages/mc || exit 1
 	fi
 fi
 
