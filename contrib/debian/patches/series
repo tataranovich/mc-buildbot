@@ -1,5 +1,5 @@
 ## UPSTREAM / FORWARDED:
-2987.patch
+#2987.patch
 
 ## DEBIAN FIXES AND ENHANCEMENTS:
 dummy-zip-password.patch
