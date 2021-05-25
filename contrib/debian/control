@@ -1,9 +1,10 @@
 Source: mc
 Section: utils
 Priority: optional
-Maintainer: Debian MC Packaging Group <pkg-mc-devel@lists.alioth.debian.org>
-Uploaders: Patrick Winnertz <winnie@debian.org>, Yury V. Zaytsev <yury@shurup.com>,
- Andreas Tille <tille@debian.org>, Dmitry Smirnov <onlyjob@debian.org>
+Maintainer: Dmitry Smirnov <onlyjob@debian.org>
+Uploaders: Yury V. Zaytsev <yury@shurup.com>
+          ,Andreas Tille <tille@debian.org>
+          ,Denis Briand <debian@denis-briand.fr>
 Build-Depends: debhelper (>= 9), dh-autoreconf, autopoint, intltool, bison
  ,check
  ,e2fslibs-dev
@@ -18,19 +19,20 @@ Build-Depends: debhelper (>= 9), dh-autoreconf, autopoint, intltool, bison
 # hence 'unzip' needed to set proper zip mode, see #661467
  ,unzip
 Standards-Version: 3.9.6
-Homepage: http://www.midnight-commander.org
-Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/mc.git
-Vcs-Git: git://anonscm.debian.org/collab-maint/mc.git
+Homepage: https://www.midnight-commander.org
+Vcs-Browser: https://salsa.debian.org/debian/mc
+Vcs-Git: https://salsa.debian.org/debian/mc.git
 
 Package: mc
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, mc-data (= ${source:Version}),
-Recommends: mime-support, perl, unzip
+Recommends: mime-support, perl, unzip, sensible-utils
 Suggests: arj
          ,bzip2
          ,catdvi | texlive-binaries
          ,dbview
          ,djvulibre-bin
+         ,epub-utils
          ,file
          ,genisoimage
          ,gv
@@ -41,6 +43,7 @@ Suggests: arj
          ,python
          ,python-boto
          ,python-tz
+         ,unar
          ,xpdf | pdf-viewer
          ,zip
 Provides: mcedit

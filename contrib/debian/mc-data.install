@@ -3,5 +3,4 @@ usr/share/man
 usr/share/mc
 debian/icons/MidnightCommander.png	usr/share/icons/hicolor/64x64/apps
 debian/icons/mc.svg			usr/share/icons/hicolor/scalable/apps
-
 debian/skins/modarin-*/*.ini		usr/share/mc/skins
