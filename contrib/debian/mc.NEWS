@@ -1,7 +1,7 @@
 mc (3:4.8.1-1) unstable; urgency=low
 
     Config files have been reorganized.
-    Some settings (e.g. Lynx-like motion) have moved to new "Panel
+    Some settings (e.g. Lynx-like motion) have moved to new "Panel 
     options" and accidentally reset to their default value.
 
     /usr/share/mc/bin/mc-wrapper.sh and other scripts are relocated to

@@ -1,11 +1,10 @@
 Source: mc
 Section: utils
 Priority: optional
-Maintainer: Dmitry Smirnov <onlyjob@debian.org>
-Uploaders: Yury V. Zaytsev <yury@shurup.com>
-          ,Andreas Tille <tille@debian.org>
-          ,Denis Briand <debian@denis-briand.fr>
-Build-Depends: debhelper-compat (= 12), autopoint, intltool, bison
+Maintainer: Debian MC Packaging Group <pkg-mc-devel@lists.alioth.debian.org>
+Uploaders: Patrick Winnertz <winnie@debian.org>, Yury V. Zaytsev <yury@shurup.com>,
+ Andreas Tille <tille@debian.org>, Dmitry Smirnov <onlyjob@debian.org>
+Build-Depends: debhelper (>= 9), dh-autoreconf, autopoint, intltool, bison
  ,check
  ,e2fslibs-dev
  ,gettext
@@ -18,27 +17,24 @@ Build-Depends: debhelper-compat (= 12), autopoint, intltool, bison
 # mc determine zip mode from zip alternatives available at build-time(!)
 # hence 'unzip' needed to set proper zip mode, see #661467
  ,unzip
-Standards-Version: 4.5.0
-Rules-Requires-Root: binary-targets
-Homepage: https://www.midnight-commander.org
-Vcs-Browser: https://salsa.debian.org/debian/mc
-Vcs-Git: https://salsa.debian.org/debian/mc.git
+Standards-Version: 3.9.6
+Homepage: http://www.midnight-commander.org
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/mc.git
+Vcs-Git: git://anonscm.debian.org/collab-maint/mc.git
 
 Package: mc
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, mc-data (= ${source:Version}),
-Recommends: mime-support, perl, unzip, sensible-utils
+Recommends: mime-support, perl, unzip
 Suggests: arj
          ,bzip2
          ,catdvi | texlive-binaries
          ,dbview
          ,djvulibre-bin
-         ,epub-utils
          ,file
          ,genisoimage
          ,gv
          ,imagemagick
-         ,libaspell-dev
          ,links | w3m | lynx
          ,odt2txt
          ,poppler-utils
@@ -71,3 +67,19 @@ Description: Midnight Commander - a powerful file manager -- data files
  servers) and files inside archives to be manipulated like real files.
  .
  This package provides architecture independent files
+
+Package: mc-dbg
+Architecture: any
+Depends: mc (=${binary:Version}), ${misc:Depends}
+Priority: extra
+Section: debug
+Suggests: gdb
+Description: Midnight Commander - a powerful file manager - debug package
+ GNU Midnight Commander is a text-mode full-screen file manager. It
+ uses a two panel interface and a subshell for command execution. It
+ includes an internal editor with syntax highlighting and an internal
+ viewer with support for binary files. Also included is Virtual
+ Filesystem (VFS), that allows files on remote systems (e.g. FTP, SSH
+ servers) and files inside archives to be manipulated like real files.
+ .
+ This package contains debugging information for mc.

@@ -12,9 +12,9 @@ Description: clear unfinished text before 'cd' to avoid accidental execution
 
 --- a/src/subshell/common.c
 +++ b/src/subshell/common.c
-@@ -1260,9 +1260,9 @@
+@@ -1665,9 +1665,9 @@
+             feed_subshell (QUIETLY, FALSE);
      }
- 
      /* The initial space keeps this out of the command history (in bash
         because we set "HISTCONTROL=ignorespace") */
 -    write_all (mc_global.tty.subshell_pty, " cd ", 4);

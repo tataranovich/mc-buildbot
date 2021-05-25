@@ -1,7 +1,5 @@
 debian/mc.desktop			usr/share/applications
-debian/mcedit.desktop			usr/share/applications
 debian/icons/mc.xpm			usr/share/pixmaps
-debian/icons/mcedit.xpm			usr/share/pixmaps
 usr/bin
 usr/lib/mc
 etc/mc/*

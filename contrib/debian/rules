@@ -9,7 +9,7 @@ export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 export DEB_LDFLAGS_MAINT_APPEND= -Wl,--as-needed
 
 %:
-	dh $@ --with autoreconf
+	dh $@ --parallel --with autoreconf
 
 # use --as-needed only if supported by dh-autoreconf (to simplify backporting)
 DH_AS_NEEDED=$(shell dpkg --compare-versions $$(dpkg --status dh-autoreconf | grep Version | cut -d' ' -f2) ge 6 && echo --as-needed)
@@ -19,7 +19,7 @@ override_dh_autoreconf:
 	dh_autoreconf $(DH_AS_NEEDED)
 
 # --enable-werror will cause FTBFS on GNU Hurd:
-# src/vfs/fish/fish.c: In function 'fish_fh_open':
+# src/vfs/fish/fish.c: In function 'fish_fh_open': 
 # fish.c:1517:5: error: 'and' of mutually exclusive equal-tests is always 0 [-Werror]
 #
 # AWK="awk" is inheritance of 4.7.* series, see http://bugs.debian.org/499723
@@ -51,7 +51,7 @@ override_dh_auto_install:
 	dh_auto_install --max-parallel=1
 
 override_dh_fixperms:
-	-chmod -c 755 debian/mc/etc/mc/*.rc
+	chmod 755 debian/mc/etc/mc/*.rc
 	dh_fixperms
 	# cons.saver has to be sgid tty to access vcsa
 	chgrp tty debian/mc/usr/lib/mc/cons.saver || true
@@ -61,4 +61,10 @@ override_dh_installchangelogs:
 	dh_installchangelogs doc/NEWS
 
 override_dh_strip:
-	dh_strip --dbgsym-migration='mc-dbg (<< 3:4.8.17~)'
+	dh_strip --dbg-package=mc-dbg
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz
+
+get-orig-source:
+	uscan --noconf --destdir=. --download-current-version --rename --verbose

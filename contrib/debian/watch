@@ -1,2 +1,4 @@
 version=3
-http://ftp.midnight-commander.org/mc-([\d\.]+)\.tar\.xz
+http://www.midnight-commander.org/downloads/mc-([\d\.]+)\.tar\.xz
+
+http://ftp.osuosl.org/pub/midnightcommander/mc-([\d\.]+)\.tar\.xz
