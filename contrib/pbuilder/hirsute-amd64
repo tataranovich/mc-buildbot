@@ -1,0 +1,8 @@
+ARCHITECTURE=amd64
+MIRRORSITE=http://ftp.ubuntu.com/ubuntu
+OTHERMIRROR="deb http://ftp.ubuntu.com/ubuntu hirsute-security main universe multiverse restricted"
+BASETGZ=/var/cache/pbuilder/base-hirsute-amd64.tgz
+BUILDRESULT=/var/cache/pbuilder/result-hirsute-amd64/
+DISTRIBUTION=hirsute
+COMPONENTS="main universe multiverse restricted"
+DEBOOTSTRAPOPTS=( '--keyring=/usr/share/keyrings/ubuntu-archive-keyring.gpg' )
