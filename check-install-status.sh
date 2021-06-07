@@ -10,7 +10,7 @@ BASE_DIR=$(dirname $(readlink -f "$0"))
 pushd $PWD
 
 cd $BASE_DIR
-find -maxdepth 1 -type f ! -name check-install-status.sh -exec diff $DIFF_OPTS '{}' '/home/buildbot/{}' \;
+find -maxdepth 1 -type f ! -name check-install-status.sh ! -name Makefile -exec diff $DIFF_OPTS '{}' '/home/buildbot/{}' \;
 
 cd $BASE_DIR/contrib
 find -maxdepth 1 -type f -exec diff $DIFF_OPTS '{}' '/home/andrey/bin/{}' \;
