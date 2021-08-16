@@ -5,8 +5,7 @@ Description: Use default editor instead of vi
 
 --- a/misc/mc.ext.in
 +++ b/misc/mc.ext.in
-@@ -822,9 +822,9 @@
- ### Includes
+@@ -825,7 +825,7 @@
  # includes should be at end of bindings
  
  include/editor
@@ -15,4 +14,3 @@ Description: Use default editor instead of vi
  
  include/image
  	Open=@EXTHELPERSDIR@/image.sh open ALL_FORMATS
- 	View=%view{ascii} @EXTHELPERSDIR@/image.sh view ALL_FORMATS

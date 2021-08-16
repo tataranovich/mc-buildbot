@@ -8,8 +8,7 @@ Description: Disable internal editor by default
 
 --- a/src/setup.c
 +++ b/src/setup.c
-@@ -180,9 +180,9 @@
- 
+@@ -179,7 +179,7 @@
  /* If true use the internal viewer */
  gboolean use_internal_view = TRUE;
  /* If set, use the builtin editor */
@@ -18,4 +17,3 @@ Description: Disable internal editor by default
  
  #ifdef HAVE_CHARSET
  /* Numbers of (file I/O) and (input/display) codepages. -1 if not selected */
- int default_source_codepage = -1;

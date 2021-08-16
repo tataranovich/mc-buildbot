@@ -6,8 +6,7 @@ Description: enable "Group undo" by default (mcedit)
 
 --- a/src/editor/edit.c
 +++ b/src/editor/edit.c
-@@ -92,9 +92,9 @@
- gboolean option_state_full_filename = TRUE;
+@@ -97,7 +97,7 @@
  
  gboolean enable_show_tabs_tws = TRUE;
  gboolean option_check_nl_at_eof = FALSE;
@@ -16,4 +15,3 @@ Description: enable "Group undo" by default (mcedit)
  gboolean show_right_margin = FALSE;
  
  char *option_backup_ext = NULL;
- char *option_filesize_threshold = NULL;

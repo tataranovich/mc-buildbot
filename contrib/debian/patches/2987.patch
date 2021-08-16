@@ -12,8 +12,7 @@ Description: clear unfinished text before 'cd' to avoid accidental execution
 
 --- a/src/subshell/common.c
 +++ b/src/subshell/common.c
-@@ -1665,9 +1665,9 @@
-             feed_subshell (QUIETLY, FALSE);
+@@ -1684,7 +1684,7 @@
      }
      /* The initial space keeps this out of the command history (in bash
         because we set "HISTCONTROL=ignorespace") */
@@ -22,4 +21,3 @@ Description: clear unfinished text before 'cd' to avoid accidental execution
  
      if (vpath != NULL)
      {
-         const char *translate;

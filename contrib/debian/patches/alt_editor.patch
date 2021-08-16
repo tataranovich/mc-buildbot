@@ -14,8 +14,7 @@ Description: Detect that mc was launched from alternatives symlink
 
 --- a/src/args.c
 +++ b/src/args.c
-@@ -639,9 +639,9 @@
-     const char *base;
+@@ -637,7 +637,7 @@
  
      base = x_basename (argv[0]);
  
@@ -24,4 +23,3 @@ Description: Detect that mc was launched from alternatives symlink
      {
          /* mce* or vi is link to mc */
          mc_global.mc_run_mode = MC_RUN_EDITOR;
-     }

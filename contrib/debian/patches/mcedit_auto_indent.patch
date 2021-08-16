@@ -7,8 +7,7 @@ Description: disable "Return does autoindent" by default (mcedit)
 
 --- a/src/editor/edit.c
 +++ b/src/editor/edit.c
-@@ -77,9 +77,9 @@
- int option_word_wrap_line_length = DEFAULT_WRAP_LINE_LENGTH;
+@@ -82,7 +82,7 @@
  gboolean option_typewriter_wrap = FALSE;
  gboolean option_auto_para_formatting = FALSE;
  gboolean option_fill_tabs_with_spaces = FALSE;
@@ -17,4 +16,3 @@ Description: disable "Return does autoindent" by default (mcedit)
  gboolean option_backspace_through_tabs = FALSE;
  gboolean option_fake_half_tabs = TRUE;
  int option_save_mode = EDIT_QUICK_SAVE;
- gboolean option_save_position = TRUE;

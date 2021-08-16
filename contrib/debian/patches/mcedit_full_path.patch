@@ -8,8 +8,7 @@ Description: 'mcedit' status line to show full path to file, like in 'mcview'.
 
 --- a/doc/man/mcedit.1.in
 +++ b/doc/man/mcedit.1.in
-@@ -600,9 +600,9 @@
- will be untouched. Default value is
+@@ -605,7 +605,7 @@
  "\fB-\fR\fB+\fR\fB*\fR\fB\\\fR\fB,\fR\fB.\fR\fB;\fR\fB:\fR\fB&\fR\fB>\fR".
  .TP
  .I editor_state_full_filename
@@ -18,11 +17,9 @@ Description: 'mcedit' status line to show full path to file, like in 'mcview'.
  file is shown.
  .SH MISCELLANEOUS
  The editor also displays non\-us characters (160+).  When editing
- binary files, you should set
 --- a/src/editor/edit.c
 +++ b/src/editor/edit.c
-@@ -88,9 +88,9 @@
- gboolean option_cursor_beyond_eol = FALSE;
+@@ -93,7 +93,7 @@
  gboolean option_line_state = FALSE;
  int option_line_state_width = 0;
  gboolean option_cursor_after_inserted_block = FALSE;
@@ -31,4 +28,3 @@ Description: 'mcedit' status line to show full path to file, like in 'mcview'.
  
  gboolean enable_show_tabs_tws = TRUE;
  gboolean option_check_nl_at_eof = FALSE;
- gboolean option_group_undo = FALSE;
