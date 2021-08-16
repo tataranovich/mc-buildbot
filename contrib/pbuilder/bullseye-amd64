@@ -1,0 +1,6 @@
+ARCHITECTURE=amd64
+MIRRORSITE=http://ftp.debian.org/debian
+BASETGZ=/var/cache/pbuilder/base-bullseye-amd64.tgz
+BUILDRESULT=/var/cache/pbuilder/result-bullseye-amd64/
+DISTRIBUTION=bullseye
+COMPONENTS="main contrib non-free"

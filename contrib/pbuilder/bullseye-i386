@@ -1,0 +1,6 @@
+ARCHITECTURE=i386
+MIRRORSITE=http://ftp.debian.org/debian
+BASETGZ=/var/cache/pbuilder/base-bullseye-i386.tgz
+BUILDRESULT=/var/cache/pbuilder/result-bullseye-i386/
+DISTRIBUTION=bullseye
+COMPONENTS="main contrib non-free"
